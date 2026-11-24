@@ -1,0 +1,2173 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Magnet Group | سيارات فاخرة • عقارات • أثاث وأجهزة منزلية</title>
+  <meta name="description" content="Magnet Group - اكتشف اختياراتنا المميزة من السيارات والعقارات، وجهّز منزلك بأرقى الأثاث والأجهزة المنزلية." />
+
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Cairo', 'sans-serif'],
+            serif: ['Playfair Display', 'Cairo', 'serif'],
+          },
+          colors: {
+            navy: '#0B132B',
+            gold: {
+              light: '#F3DC8B',
+              DEFAULT: '#C8A236',
+              dark: '#9A7418',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+
+  <style>
+    :root {
+      --gold-grad: linear-gradient(135deg, #E3C265 0%, #C79F33 52%, #A67E19 100%);
+      --gold-grad-hover: linear-gradient(135deg, #EAD07D 0%, #D2AB40 52%, #B58C22 100%);
+    }
+
+
+    body {
+      background-color: #FAFAFA;
+      color: #1A1A1A;
+      font-family: 'Cairo', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+
+
+    .font-luxury {
+      font-family: 'Playfair Display', 'Cairo', serif;
+    }
+
+
+    .gold-gradient {
+      background: var(--gold-grad);
+    }
+
+
+    .gold-gradient:hover {
+      background: var(--gold-grad-hover);
+    }
+
+
+    .gold-text {
+      background: linear-gradient(135deg, #C9A02F 0%, #9E7716 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+
+    .price-pill {
+      background: linear-gradient(90deg, #E7CB78 0%, #C8A134 55%, #B1881D 100%);
+      box-shadow: 0 4px 14px rgba(199, 159, 51, 0.28);
+    }
+
+
+    .card-shadow {
+      box-shadow: 0 4px 20px rgba(11, 19, 43, 0.05);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+
+    .card-shadow:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(11, 19, 43, 0.09);
+    }
+
+
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+
+    /* Lightbox Zoom Styles */
+    #lightbox-viewport {
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+
+    #lightbox-img {
+      transition: transform 0.12s ease-out;
+      will-change: transform;
+      max-width: 92vw;
+      max-height: 82vh;
+      object-fit: contain;
+    }
+
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D4B45C;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F1F1;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+
+  <!-- ==================== TOP NAVIGATION ==================== -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100">
+    <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+      <!-- Brand / Back -->
+      <div class="flex items-center gap-3">
+        <button id="nav-back-btn" onclick="goHome()" class="hidden w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-50 transition" title="رجوع">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+        </button>
+        <div onclick="goHome()" class="flex items-center gap-2.5 cursor-pointer">
+          <div class="w-10 h-10 bg-[#0B132B] rounded-lg flex flex-col items-center justify-center border border-[#C8A236]/40 shadow-sm">
+            <span class="font-luxury text-[#E3C265] text-lg font-bold leading-none">M</span>
+            <span class="text-[6px] tracking-widest text-[#E3C265] font-semibold mt-0.5">MAGNET</span>
+          </div>
+          <span class="font-luxury text-lg font-bold gold-text tracking-wide">Magnet Group</span>
+        </div>
+      </div>
+
+
+      <!-- Controls: Language Switch + Shield Admin Icon -->
+      <div class="flex items-center gap-2.5">
+        <!-- Language Toggle -->
+        <button id="lang-toggle-btn" onclick="toggleLanguage()" class="flex items-center bg-white border border-gray-200 rounded-full p-0.5 shadow-sm text-xs font-bold">
+          <span id="lang-ar-badge" class="px-2.5 py-1 rounded-full gold-gradient text-[#0B132B] transition">ع</span>
+          <span id="lang-en-badge" class="px-2.5 py-1 rounded-full text-gray-500 transition">EN</span>
+        </button>
+
+
+        <!-- Shield Icon (Owner Admin Panel) -->
+        <button onclick="openAdminRoute()" class="w-9 h-9 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center text-gray-600 hover:border-[#C8A236] hover:text-[#A67E19] transition" title="لوحة تحكم المالك">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ==================== MAIN CONTENT CONTAINER ==================== -->
+  <main id="app-root" class="flex-1 max-w-5xl w-full mx-auto px-4 pb-16">
+    <!-- Dynamic views injected by JS -->
+  </main>
+
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-gray-200/70 bg-white py-6 mt-auto">
+    <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500">
+      <div class="flex items-center gap-2">
+        <span class="font-luxury font-bold text-[#0B132B] text-sm">Magnet Group</span>
+        <span>•</span>
+        <span data-i18n="footer_rights">جميع الحقوق محفوظة</span>
+      </div>
+      <a id="footer-wa-link" href="https://wa.me/201551939156" target="_blank" class="text-[#A67E19] font-semibold hover:underline">
+        WhatsApp: 01551939156
+      </a>
+    </div>
+  </footer>
+
+
+  <!-- ==================== PRODUCT DETAILS MODAL ==================== -->
+  <div id="product-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm overflow-y-auto p-3 sm:p-6">
+    <div class="min-h-full flex items-center justify-center">
+      <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative animate-fade-in">
+        <!-- Close Button -->
+        <button onclick="closeProductModal()" class="absolute top-4 left-4 z-20 w-10 h-10 rounded-full bg-white/90 backdrop-blur shadow-md flex items-center justify-center text-gray-800 hover:bg-white transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+        </button>
+
+
+        <!-- Image Gallery Section -->
+        <div class="bg-[#0B132B] relative">
+          <div class="relative aspect-[16/11] w-full flex items-center justify-center overflow-hidden cursor-zoom-in group" onclick="openLightboxCurrent()">
+            <img id="modal-main-img" src="" alt="" class="w-full h-full object-cover transition duration-300 group-hover:scale-[1.02]" />
+            <div class="absolute bottom-3 right-3 bg-black/65 text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-sm">
+              <svg class="w-3.5 h-3.5 text-[#E3C265]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6"/></svg>
+              <span data-i18n="tap_to_zoom">اضغط على الصورة للتكبير</span>
+            </div>
+            <div id="modal-img-counter" class="absolute bottom-3 left-3 bg-black/65 text-white text-xs font-bold px-2.5 py-1 rounded-full backdrop-blur-sm">1 / 1</div>
+          </div>
+
+
+          <!-- Gallery Prev / Next Arrows -->
+          <button id="modal-prev-img" onclick="stepModalImage(-1)" class="hidden absolute top-1/2 -translate-y-1/2 right-3 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/75 transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"/></svg>
+          </button>
+          <button id="modal-next-img" onclick="stepModalImage(1)" class="hidden absolute top-1/2 -translate-y-1/2 left-3 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/75 transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
+          </button>
+
+
+          <!-- Thumbnails Strip (Supports up to 15 images) -->
+          <div id="modal-thumbs" class="hidden flex gap-2 p-3 bg-[#0E1730] overflow-x-auto"></div>
+        </div>
+
+
+        <!-- Product Body -->
+        <div class="p-5 sm:p-7">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+            <span id="modal-category-badge" class="text-xs font-bold px-3 py-1 rounded-full bg-amber-50 text-[#9A7418] border border-amber-200/70"></span>
+            <span id="modal-sub-badge" class="text-xs text-gray-500 font-semibold"></span>
+          </div>
+
+
+          <h2 id="modal-title" class="font-luxury text-xl sm:text-2xl font-bold text-[#0B132B] leading-snug mb-4"></h2>
+
+
+          <!-- Gold Price Bar -->
+          <div class="inline-flex items-center gap-2 price-pill text-[#0B132B] font-extrabold text-lg sm:text-xl px-5 py-2.5 rounded-full mb-5">
+            <span id="modal-price"></span>
+          </div>
+
+
+          <!-- Formatted Description -->
+          <div id="modal-description" class="text-gray-700 text-sm sm:text-[15px] leading-relaxed space-y-2 border-t border-gray-100 pt-4 mb-6"></div>
+
+
+          <!-- WhatsApp CTA -->
+          <a id="modal-wa-btn" href="#" target="_blank" class="w-full gold-gradient text-[#0B132B] font-bold py-3.5 px-6 rounded-2xl shadow-md flex items-center justify-center gap-2.5 text-base transition">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zM12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.986-1.418A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+            <span data-i18n="inquire_whatsapp">استفسر الآن عبر واتساب</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================== FULLSCREEN INTERACTIVE IMAGE LIGHTBOX ==================== -->
+  <div id="image-lightbox" class="fixed inset-0 z-[60] hidden bg-black/95 flex flex-col">
+    <!-- Top Controls Bar -->
+    <div class="flex items-center justify-between px-4 py-3 bg-black/60 backdrop-blur-md border-b border-white/10 z-20">
+      <div class="flex items-center gap-2 text-white text-sm font-semibold">
+        <span id="lightbox-counter" class="bg-white/15 px-3 py-1 rounded-full">1 / 1</span>
+        <span id="lightbox-zoom-label" class="text-xs text-[#E3C265] font-mono">100%</span>
+      </div>
+
+
+      <div class="flex items-center gap-2">
+        <button onclick="zoomLightbox(-0.4)" class="w-9 h-9 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center text-lg font-bold transition" title="تصغير">−</button>
+        <button onclick="resetLightboxZoom()" class="px-3 h-9 rounded-full bg-white/15 hover:bg-white/25 text-white text-xs font-bold transition" title="الحجم الأصلي">1:1</button>
+        <button onclick="zoomLightbox(0.4)" class="w-9 h-9 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center text-lg font-bold transition" title="تكبير">+</button>
+        <button onclick="closeLightbox()" class="w-9 h-9 rounded-full bg-red-500/80 hover:bg-red-500 text-white flex items-center justify-center ml-2 transition" title="إغلاق">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+
+    <!-- Interactive Zoom/Pan Viewport -->
+    <div id="lightbox-viewport" class="flex-1 relative flex items-center justify-center overflow-hidden">
+      <img id="lightbox-img" src="" alt="Full View" draggable="false" />
+
+
+      <!-- Prev / Next Buttons -->
+      <button id="lb-prev" onclick="stepLightbox(-1)" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center backdrop-blur transition z-20">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"/></svg>
+      </button>
+      <button id="lb-next" onclick="stepLightbox(1)" class="hidden absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center backdrop-blur transition z-20">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
+      </button>
+    </div>
+
+
+    <!-- Bottom Hint -->
+    <div class="text-center py-2.5 text-[11px] text-white/60 bg-black/60">
+      يمكنك التكبير والتصغير بإصبعين أو بالضغط مرتين على الصورة أو باستخدام أزرار (+ / −)
+    </div>
+  </div>
+
+
+  <!-- ==================== TOAST NOTIFICATION ==================== -->
+  <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-[70] hidden bg-[#0B132B] text-white text-sm font-semibold px-5 py-3 rounded-full shadow-xl border border-[#C8A236]/50"></div>
+
+
+  <!-- ==================== MAIN APPLICATION SCRIPT ==================== -->
+  <script type="module">
+    // =========================================================================
+    // 1. إعدادات المالك والربط (جاهزة ببريدك الإلكتروني المباشر)
+    // =========================================================================
+    const OWNER_EMAIL = "alialdiasty22@gmail.com";
+    const WHATSAPP_NUMBER = "201551939156";
+    const MAX_IMAGES_PER_PRODUCT = 15;
+
+
+    // ✅ إعدادات Firebase المربوطة بمشروع magnet-group-21
+    const USER_FIREBASE_CONFIG = {
+      apiKey: "AIzaSyC21hk6Uflcm9ApcWdu1xB9aYk6RFbr-To",
+      authDomain: "magnet-group-21.firebaseapp.com",
+      projectId: "magnet-group-21",
+      storageBucket: "magnet-group-21.firebasestorage.app",
+      messagingSenderId: "851342530641",
+      appId: "1:851342530641:web:793a8086063b5c3546c070"
+    };
+
+
+    const isFirebaseConfigured = Boolean(
+      USER_FIREBASE_CONFIG.apiKey &&
+      !USER_FIREBASE_CONFIG.apiKey.includes("PUT_YOUR_") &&
+      USER_FIREBASE_CONFIG.projectId &&
+      !USER_FIREBASE_CONFIG.projectId.includes("PUT_YOUR_")
+    );
+
+
+    // =========================================================================
+    // 2. البيانات الأساسية والأقسام (جميع المنتجات الـ 20 السابقة جاهزة)
+    // =========================================================================
+    const CATEGORIES = [
+      {
+        id: "motors",
+        name: "Magnet Motors",
+        arSubtitle: "سيارات فاخرة ومختارة",
+        enSubtitle: "Luxury & Selected Cars",
+        tagsAr: ["سيارات رياضية", "سيدان فاخرة", "دفع رباعي"],
+        tagsEn: ["Sports Cars", "Luxury Sedan", "SUV / 4x4"],
+        accent: "#0B132B"
+      },
+      {
+        id: "realestate",
+        name: "Magnet Real Estate",
+        arSubtitle: "عقارات استثنائية وفرص استثمارية",
+        enSubtitle: "Exceptional Properties & Investments",
+        tagsAr: ["فلل وقصور", "شاليهات الساحل", "شقق وتجاري"],
+        tagsEn: ["Villas", "North Coast", "Apartments & Commercial"],
+        accent: "#162038"
+      },
+      {
+        id: "home",
+        name: "Magnet Home",
+        arSubtitle: "أرقى الأثاث والأجهزة المنزلية",
+        enSubtitle: "Premium Furniture & Home Appliances",
+        tagsAr: ["أجهزة منزلية", "أثاث مودرن", "تسليم فوري"],
+        tagsEn: ["Appliances", "Modern Furniture", "Ready Delivery"],
+        accent: "#1C1917"
+      }
+    ];
+
+
+    function makeLuxuryPlaceholder(categoryName, titleText) {
+      const safeTitle = (titleText || "Magnet Group").replace(/[<>&"']/g, "").slice(0, 38);
+      const safeCat = (categoryName || "MAGNET GROUP").replace(/[<>&"']/g, "");
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="800" height="550" viewBox="0 0 800 550">
+          <defs>
+            <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0B132B"/>
+              <stop offset="60%" stop-color="#141F3D"/>
+              <stop offset="100%" stop-color="#1D2A4A"/>
+            </linearGradient>
+            <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#F0D57C"/>
+              <stop offset="50%" stop-color="#C8A236"/>
+              <stop offset="100%" stop-color="#9F7818"/>
+            </linearGradient>
+          </defs>
+          <rect width="800" height="550" fill="url(#bg)"/>
+          <rect x="24" y="24" width="752" height="502" rx="18" fill="none" stroke="url(#gold)" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="400" cy="200" r="56" fill="none" stroke="url(#gold)" stroke-width="2.5"/>
+          <text x="400" y="220" text-anchor="middle" fill="url(#gold)" font-family="Georgia, serif" font-size="60" font-weight="bold">M</text>
+          <text x="400" y="305" text-anchor="middle" fill="#E3C265" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" font-weight="bold">${safeCat.toUpperCase()}</text>
+          <line x1="290" y1="330" x2="510" y2="330" stroke="url(#gold)" stroke-width="1.5" stroke-opacity="0.6"/>
+          <text x="400" y="375" text-anchor="middle" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="23" font-weight="bold">${safeTitle}</text>
+          <text x="400" y="420" text-anchor="middle" fill="#9CA3AF" font-family="Arial, sans-serif" font-size="14">Magnet Group Exclusive Collection</text>
+        </svg>`;
+      return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg.trim());
+    }
+
+
+    const INITIAL_PRODUCTS = [
+      // ==================== MAGNET MOTORS (11) ====================
+      {
+        id: "car-porsche-cayenne-2024",
+        category: "motors",
+        subcategory: "سيارات رياضية",
+        title: "Porsche Cayenne Coupe 2024 – Nardo Grey",
+        price: 8000000,
+        currency: "EGP",
+        description: `**الأداء والمواصفات الأساسية:**
+• **Engine:** محرك 3.0-liter turbocharged V6 يولد قوة 348Hp.
+• **Model & Mileage:** موديل 2024، عداد 41,000Km فقط.
+• **Color & Protection:** لون Nardo Grey مميز مع فرش داخلي أحمر، والسيارة عليها طبقة حماية كاملة.
+
+
+**الرفاهية والتجهيزات الداخلية:**
+• سقف بانوراما بالكامل (Full Panoramic Roof).
+• كراسي كهربائية مزودة بخاصيتي التسخين والذاكرة (Heated & Memory Seats).
+• نظام صوتي محيطي فاخر (Bose Sound System).
+• تكييف خلفي منفصل لراحة الركاب، وشنطة خلفية كهربائية.
+
+
+**التكنولوجيا والأمان:**
+• شاشة ذكية تدعم نظامي Apple CarPlay و Android Auto.
+• نظام الدخول الذكي بدون مفتاح (Keyless Entry).
+• كاميرا محيطية 360° لكشف جميع الزوايا.
+• نظام المساعدة في تغيير المسار (Lane Change Assist).
+• جنوط رياضية مميزة مقاس 21 إنش.`,
+        images: []
+      },
+      {
+        id: "car-evoque-2026",
+        category: "motors",
+        subcategory: "دفع رباعي",
+        title: "Range Rover Evoque P160 Hoxton Edition 2026 – Zero",
+        price: 4350000,
+        currency: "EGP",
+        description: `**الأداء والمواصفات الأساسية:**
+• **Engine:** محرك 1500cc Turbo يولد قوة 160HP.
+• **Model & Condition:** موديل 2026 (Zero)، نسخة (Hoxton Edition) كاملة المواصفات (Fully Loaded) – وكيل.
+• **Color:** لون أسود ملكي فاخر، مع فرش داخلي مميز (أوف وايت في أسود).
+
+
+**الرفاهية والتجهيزات الداخلية:**
+• سقف بانوراما بالكامل (Full Panoramic Roof).
+• كراسي كهربائية مزودة بخاصية الذاكرة (Memory Seats).
+• نظام صوتي نقي وفاخر (Meridian Sound System).
+• شاحن لاسلكي للهواتف (Wireless Charger)، تكييف خلفي، وشنطة خلفية كهربائية.
+
+
+**التكنولوجيا وأنظمة الأمان:**
+• شاشة عرض البيانات على الزجاج الأمامي (Head-Up Display).
+• نظام الدخول الذكي (Keyless Entry) ومساعد الأوامر الصوتية (Voice Assist).
+• مثبت سرعة تفاعلي (Adaptive Cruise Control) ونظام الفرامل النشط المساعد (Active Brake Assist).
+• نظام اصطفاف متكامل بكاميرا 360° وسينسور 360°، وجنوط رياضية مقاس 20 إنش.`,
+        images: []
+      },
+      {
+        id: "car-rr-sport-2026",
+        category: "motors",
+        subcategory: "دفع رباعي",
+        title: "Range Rover Sport P360 SE 2026 – Zero",
+        price: 11250000,
+        currency: "EGP",
+        description: `**الأداء والمواصفات الأساسية:**
+• **Engine:** محرك 3.0-liter turbocharged يولد قوة 355HP، مدعوم بنظام تعليق هوائي (Air Suspension).
+• **Model & Condition:** موديل 2026 (Zero).
+• **Color:** لون خارجي استثنائي (Borasco Grey) مع فرش داخلي فاخر (Burgundy).
+
+
+**الرفاهية والتجهيزات الداخلية:**
+• أبواب شفط، وسقف بانوراما بالكامل.
+• كراسي كهربائية (أمامية وخلفية) مزودة بخاصيتي التسخين والذاكرة (Heated & Memory Seats).
+• تكييف متطور بـ 4 مناطق (4-Zone Climate Control) وثلاجة تبريد مدمجة.
+• شاشة ذكية مقاس 13 إنش، ونظام صوتي محيطي (Meridian Sound System).
+• شاحن لاسلكي للهواتف (Wireless Charging)، وشنطة خلفية كهربائية.
+
+
+**التكنولوجيا وأنظمة الأمان:**
+• شاشة عرض البيانات على الزجاج الأمامي (Head-Up Display).
+• نظام الدخول الذكي (Keyless Entry).
+• نظام كشف النقطة العمياء (Blind Spot Assist) ومساعد البقاء في المسار (Lane Assist).
+• كاميرا محيطية 360° وجنوط رياضية ضخمة مقاس 22 إنش.`,
+        images: []
+      },
+      {
+        id: "car-jeep-cherokee-2024",
+        category: "motors",
+        subcategory: "دفع رباعي",
+        title: "Jeep Cherokee Limited 2024 – Wakel (7 Seats)",
+        price: 4900000,
+        currency: "EGP",
+        description: `**الأداء والمواصفات الأساسية (كسر زيرو):**
+• **Engine & Drive:** محرك قوي 3600CC V6، مزود بنظام دفع رباعي (4x4) وأوضاع قيادة متعددة (Drive Modes).
+• **Model & Condition:** موديل 2024 (وكيل)، عداد 1,700Km فقط، مع رخصة سارية حتى (3/2027).
+• **Color:** لون خارجي كحلي فخم، مع فرش داخلي أسود أنيق.
+
+
+**الرفاهية والتجهيزات الداخلية:**
+• مقصورة عائلية فسيحة تتسع لـ 7 ركاب (7 Seats) وسقف بانوراما بالكامل.
+• كراسي كهربائية بالذاكرة والتسخين (Memory & Heated Seats)، وطارة تسخين.
+• نظام صوتي نقي من (Alpine Speakers) وتكييف خلفي.
+
+
+**التكنولوجيا وأنظمة الأمان:**
+• Apple CarPlay & Android Auto، دخول ذكي (Keyless Entry)، وبصمة تشغيل (Start Engine).
+• مثبت سرعة (Cruise Control)، نظام الثبات (Traction Control)، وأوامر صوتية (Voice Control).
+• جنوط رياضية مقاس 20 إنش.`,
+        images: []
+      },
+      {
+        id: "car-glc300-2026",
+        category: "motors",
+        subcategory: "دفع رباعي",
+        title: "Mercedes-Benz GLC300 4MATIC AMG Night Package 2026 – Zero",
+        price: 6050000,
+        currency: "EGP",
+        description: `**الأداء والمواصفات الأساسية:**
+• **Engine & Drive:** محرك 2000cc Turbo يولد قوة 255HP، بدفع رباعي ذكي (4MATIC).
+• **Model & Edition:** موديل 2026 (Zero)، فئة (AMG Night Package) كاملة المواصفات (Fully Loaded).
+• **Color:** لون أسود ملكي فخم مع فرش داخلي أحمر رياضي.
+
+
+**الرفاهية والتجهيزات الداخلية:**
+• سقف بانوراما بالكامل، وكراسي كهربائية بالذاكرة والتسخين (Memory & Heated Seats).
+• نظام صوتي محيطي من (Burmester Sound System).
+• تكييف متطور بـ 4 مناطق (4-Zone Climate Control) وشنطة خلفية كهربائية.
+
+
+**التكنولوجيا وأنظمة الأمان:**
+• شاشة عرض أمامية (Head-Up Display) ودخول ذكي (Keyless Entry).
+• كاميرا محيطية 360° وحساسات (Sensors) 360°، وجنوط رياضية مقاس 19 إنش.`,
+        images: []
+      },
+      {
+        id: "car-gle53-2026",
+        category: "motors",
+        subcategory: "سيارات رياضية",
+        title: "Mercedes-Benz GLE53 AMG 2026 – Zero (وكيل)",
+        price: 8700000,
+        currency: "EGP",
+        description: `**الأداء الرياضي والمواصفات الأساسية:**
+• **Engine & Power:** محرك 3000cc V6 AMG بقوة 429HP، وتسارع من 0 إلى 100 كم/س في 5 ثوانٍ فقط.
+• **Model & Condition:** موديل 2026 (Zero)، نسخة الوكيل، كاملة المواصفات (Fully Loaded).
+• **Color:** أسود هجومي فخم مع فرش داخلي أسود.
+
+
+**الرفاهية والتجهيزات الداخلية:**
+• كراسي AMG رياضية مزودة بمساج، تبريد، وتسخين.
+• أبواب شفط، ونظام صوتي فائق النقاء (Burmester Sound System).
+
+
+**التكنولوجيا والجينات الرياضية:**
+• شاشة عرض أمامية (Head-Up Display) ونظام تعليق هوائي متكيف (Air Suspension).
+• نظام عادم رياضي (AMG Exhausts)، فرامل (AMG Brakes)، وجنوط (AMG).`,
+        images: []
+      },
+      {
+        id: "car-gls580-2026",
+        category: "motors",
+        subcategory: "دفع رباعي",
+        title: "Mercedes-Benz GLS 580 2026 – Zero (وكيل)",
+        price: 9900000,
+        currency: "EGP",
+        description: `**الأداء والمواصفات الأساسية:**
+• **Engine & Power:** محرك جبار 4000cc V8 يولد قوة 510HP.
+• **Model & Condition:** موديل 2026 (Zero)، نسخة الوكيل.
+• **Color:** طلاء خارجي أسود هيبة مع فرش داخلي بني أنيق.
+
+
+**الرفاهية والتجهيزات الداخلية:**
+• كراسي كهربائية بالذاكرة والتبريد والتسخين، وشاشات خلفية للركاب.
+• نظام صوتي (Burmester Sound System) وإضاءة داخلية متطورة (Ambient Light Plus).
+• تكييف 4 مناطق (4-Zone)، سقف بانوراما بالكامل، وشنطة كهرباء.
+
+
+**التكنولوجيا والاتصال:**
+• شاشة تدعم (Apple CarPlay) و (Android Auto) ودخول ذكي (Keyless Entry).`,
+        images: []
+      },
+      {
+        id: "car-cla200-2026",
+        category: "motors",
+        subcategory: "سيدان فاخرة",
+        title: "Mercedes-Benz CLA 200 AMG Night Package 2026 – 7,000Km",
+        price: 3250000,
+        currency: "EGP",
+        description: `**الأداء والمواصفات الأساسية (كسر زيرو):**
+• **Engine & Power:** محرك 1300cc Turbo يولد قوة 163HP.
+• **Model & Condition:** موديل 2026 بحالة الزيرو (Like New)، عداد 7,000Km فقط.
+• **Color & Package:** لون رياضي (Nardo Grey) مع (Night Package) وفرش أسود ألكانتارا (Alcantara).
+• **الترخيص والسداد:** مرور الإسكندرية (رخصة سنة)، متاح كاش وقسط.
+
+
+**الرفاهية والتكنولوجيا:**
+• سقف بانوراما، كراسي كهرباء ميموري وتسخين، وإضاءة محيطية (Ambient Light).
+• هيدب ديسبلاي (Head-Up Display)، شاحن لاسلكي (Wireless Charger)، تكييف خلفي، وجنوط 19 إنش.`,
+        images: []
+      },
+      {
+        id: "car-sportage-2024",
+        category: "motors",
+        subcategory: "دفع رباعي",
+        title: "KIA Sportage GT-Line 2024 – صيانات توكيل",
+        price: 1975000,
+        currency: "EGP",
+        description: `**الأداء والمواصفات الأساسية:**
+• **Engine & Power:** محرك 1600cc Turbo يولد قوة 180HP.
+• **Model & Condition:** موديل 2024 أعلى فئة (GT-Line)، عداد 88,000Km، جميع الصيانات منتظمة في التوكيل.
+• **الترخيص:** رخصة سنة مرور الجيزة، زجاج جانبي وخلفي ملون (فاميه) مثبوت على الرخصة.
+
+
+**الرفاهية والتكنولوجيا:**
+• سقف بانوراما، كراسي كهربائية تسخين وتبريد، شاشة 12.3 إنش، وتكييف خلفي وشنطة كهرباء.
+• دخول ذكي، بصمة تشغيل، أوضاع قيادة (Drive Modes)، Auto Hold، أوامر صوتية، Traction Control.
+• كاميرا محيطية 360° وجنوط رياضية 19 إنش.`,
+        images: []
+      },
+      {
+        id: "car-audi-q3-2024",
+        category: "motors",
+        subcategory: "دفع رباعي",
+        title: "Audi Q3 35 TFSI S-Line 2024 – (White on Black)",
+        price: 2450000,
+        currency: "EGP",
+        description: `**الأداء والتحكم:**
+• **Engine:** محرك 1400cc Turbo بقوة 150 حصان، أداء رياضي واقتصادي مع أنظمة قيادة متطورة.
+• **Model & Edition:** موديل 2024، الفئة الرياضية S-Line.
+• **Color:** لون خارجي أبيض أنيق مع مقصورة داخلية سوداء فاخرة.
+
+
+**التجهيزات والأمان:**
+• تصميم داخلي رياضي فخم، شاشة ذكية، أنظمة ثبات وأمان متكاملة من Audi.`,
+        images: []
+      },
+      {
+        id: "car-jetour-x70-2023",
+        category: "motors",
+        subcategory: "دفع رباعي",
+        title: "Jetour X70 Luxury 2023 – 7 Seats (Red on Black)",
+        price: 1075000,
+        currency: "EGP",
+        description: `**الأداء والمحرك:**
+• **Engine:** محرك 1500cc Turbo بقوة 156 حصان، يجمع بين الأداء العملي والرحابة العائلية.
+• **Model & Capacity:** موديل 2023 فئة Luxury، عائلية بـ 7 مقاعد مريحة.
+• **Color:** لون أحمر جذاب مع فرش داخلي أسود أنيق.`,
+        images: []
+      },
+
+
+      // ==================== MAGNET REAL ESTATE (6) ====================
+      {
+        id: "re-dokki-villa",
+        category: "realestate",
+        subcategory: "فلل فاخرة",
+        title: "فيلا مستقلة فاخرة – الدقي (شارع مصدق)",
+        price: 62000000,
+        currency: "EGP",
+        description: `**الموقع والتميز:**
+• موقع استثنائي نادر في قلب الدقي (شارع مصدق الحيوي والراقي).
+• مناسبة للسكن الفاخر أو كمقر إداري لشركة كبرى أو سفارة.
+
+
+**تفاصيل العرض:**
+• مساحات واسعة وتشطيب راقٍ وخصوصية تامة.
+• اضغط على زر الواتساب لمعرفة المساحة الكاملة والتفاصيل الهندسية وترتيب موعد للمعاينة.`,
+        images: []
+      },
+      {
+        id: "re-zamalek-building",
+        category: "realestate",
+        subcategory: "فرص استثمارية",
+        title: "عمارة فاخرة بموقع استثنائي – الزمالك",
+        price: 10000000,
+        currency: "USD",
+        description: `**فرصة استثمارية نادرة:**
+• عقار كامل بموقع استراتيجي مميز في أرقى أحياء القاهرة (الزمالك).
+• قيمة عقارية واستثمارية عالية جداً بعائد مستمر ومضمون.
+
+
+**التفاصيل:**
+• السعر: 10,000,000 دولار أمريكي.
+• تواصل معنا مباشرة عبر واتساب للاطلاع على الأوراق والتفاصيل الكاملة للمستثمرين الجادين.`,
+        images: []
+      },
+      {
+        id: "re-ivilla-roof",
+        category: "realestate",
+        subcategory: "آي فيلا",
+        title: "آي فيلا روف (iVilla Roof) فاخرة بإطلالة مميزة",
+        price: 14500000,
+        currency: "EGP",
+        description: `**المميزات الأساسية:**
+• آي فيلا روف بتصميم عصري يجمع بين خصوصية الفيلا وإطلالة الروف المفتوحة.
+• تقسيمة داخلية ذكية ومساحات مشمسة بالكامل.
+
+
+**التفاصيل والمعاينة:**
+• موقع راقٍ داخل كمبوند متكامل الخدمات والأمن والحراسة 24/7.
+• اضغط على زر الواتساب لطلب الصور والـ Floor Plan وتحديد موعد معاينة.`,
+        images: []
+      },
+      {
+        id: "re-hadayek-shop",
+        category: "realestate",
+        subcategory: "تجاري",
+        title: "محل تجاري بموقع حيوي – حدائق الأهرام",
+        price: 15000000,
+        currency: "EGP",
+        description: `**الموقع والاستثمار:**
+• محل تجاري بموقع حيوي ذي كثافة مرورية وشرائية عالية في حدائق الأهرام.
+• واجهة مميزة تناسب البراندات الكبرى، الصيدليات، الكافيهات، أو التوكيلات.
+
+
+**التفاصيل:**
+• فرصة استثمارية جاهزة للتشغيل أو التأجير بعائد شهري ممتاز.`,
+        images: []
+      },
+      {
+        id: "re-degla-landmark",
+        category: "realestate",
+        subcategory: "شقق سكنية",
+        title: "شقة مميزة – دجلة لاند مارك (مدينة نصر)",
+        price: 3500000,
+        currency: "EGP",
+        description: `**الموقع والمميزات:**
+• شقة بموقع ممتاز داخل مشروع دجلة لاند مارك الشهير.
+• بالقرب من المحاور الرئيسية (محور المشير – التجمع الخامس – المعادي).
+
+
+**المرافق:**
+• أمن وحراسة 24 ساعة، مداخل فندقية، وجراجات خاصة.`,
+        images: []
+      },
+      {
+        id: "re-bianchi-chalet",
+        category: "realestate",
+        subcategory: "شاليهات الساحل",
+        title: "شاليه فاخر – بيانكي الساحل الشمالي (Bianchi)",
+        price: 9500000,
+        currency: "EGP",
+        description: `**الموقع والإطلالة:**
+• شاليه راقٍ في قرية بيانكي (Bianchi) – سيدي عبد الرحمن، الساحل الشمالي.
+• تصميم يوناني فاخر وإطلالات خلابة على البحيرات والمساحات الخضراء.
+
+
+**الخدمات:**
+• شاطئ رملي خاص، حمامات سباحة، وكلوب هاوس متكامل.`,
+        images: []
+      },
+
+
+      // ==================== MAGNET HOME (3) ====================
+      {
+        id: "home-kiriazi-fridge",
+        category: "home",
+        subcategory: "أجهزة منزلية",
+        title: "ثلاجة كريازي 370 لتر – كفاءة عالية وتبريد فائق",
+        price: 26900,
+        currency: "EGP",
+        description: `**المواصفات الأساسية:**
+• السعة اللترية: 370 لتر (تصميم عملي يناسب الأسرة المصرية).
+• تقنية نوفروست (No Frost) لمنع تكون الثلج وتوزيع هواء متوازن.
+• موفرة للكهرباء وبموتور عالي التحمل ومقاوم للحرارة.
+• ضمان رسمي معتمد وتوصيل متاح.`,
+        images: []
+      },
+      {
+        id: "home-sharp-freezer",
+        category: "home",
+        subcategory: "أجهزة منزلية",
+        title: "ديب فريزر شارب 6 درج إنفرتر – نوفروست",
+        price: 38900,
+        currency: "EGP",
+        description: `**المواصفات الأساسية:**
+• عدد الأدراج: 6 درج بمساحات تخزين واسعة وشفافة.
+• تكنولوجيا الإنفرتر (Inverter) لتوفير استهلاك الكهرباء وتشغيل هادئ تماماً.
+• نظام التجميد السريع (Fast Freezing) للحفاظ على جودة الأطعمة.
+• ضمان العربي الرسمي.`,
+        images: []
+      },
+      {
+        id: "home-corner-sofa",
+        category: "home",
+        subcategory: "أثاث مودرن",
+        title: "ركنة مودرن فاخرة – خامات عالية وتسليم فوري",
+        price: 17500,
+        currency: "EGP",
+        description: `**المواصفات والخامات:**
+• تصميم عصري مريح يناسب مختلف مساحات غرف المعيشة.
+• خشب زان قوي وإسفنج عالي الكثافة لعمر افتراضي طويل.
+• أقمشة فاخرة سهلة التنظيف ومتينة.
+• **ميزة إضافية:** متاحة للتسليم الفوري مباشرة.`,
+        images: []
+      }
+    ];
+
+
+    // Assign luxury branded SVG cover if no uploaded photos yet
+    INITIAL_PRODUCTS.forEach(p => {
+      if (!p.images || p.images.length === 0) {
+        const cat = CATEGORIES.find(c => c.id === p.category);
+        p.images = [makeLuxuryPlaceholder(cat ? cat.name : "Magnet Group", p.title)];
+      }
+    });
+
+
+    // =========================================================================
+    // 3. حالة التطبيق واللغة والبيانات
+    // =========================================================================
+    const STORAGE_KEY = "magnet_group_products_v1";
+    const state = {
+      lang: "ar",
+      view: "home", // 'home' | 'category' | 'admin'
+      activeCategoryId: null,
+      categorySearch: "",
+      categorySubFilter: "all",
+      products: [],
+      randomIds: [],
+      // Auth state
+      user: null,
+      authReady: !isFirebaseConfigured,
+      localAdminUnlocked: false,
+      // Firebase refs
+      fb: null,
+      // Modal & Lightbox state
+      modalProduct: null,
+      modalImages: [],
+      modalImageIndex: 0,
+      // Admin Form state
+      editingProductId: null,
+      adminFormImages: [],
+      adminSearch: ""
+    };
+
+
+    const I18N = {
+      ar: {
+        whatsapp_btn: "تواصل عبر واتساب",
+        hero_subtitle: "اكتشف اختياراتنا المميزة من السيارات والعقارات، وجهّز منزلك بأرقى الأثاث والأجهزة المنزلية.",
+        sections_label: "الأقسام",
+        sections_heading: "ثلاث عوالم من الفخامة",
+        view_more: "عرض المزيد",
+        items_count: "قطعة",
+        curated_label: "مختاراتنا لك",
+        curated_heading: "مختارات مميزة من جميع الأقسام",
+        footer_rights: "جميع الحقوق محفوظة",
+        tap_to_zoom: "اضغط على الصورة للتكبير",
+        inquire_whatsapp: "استفسر الآن عبر واتساب",
+        search_placeholder: "ابحث باسم المنتج أو المواصفات...",
+        all_filter: "الكل",
+        no_results: "لا توجد منتجات مطابقة لبحثك حالياً."
+      },
+      en: {
+        whatsapp_btn: "Contact via WhatsApp",
+        hero_subtitle: "Discover our exclusive collection of luxury cars, real estate, and finest home furniture & appliances.",
+        sections_label: "Categories",
+        sections_heading: "Three Worlds of Luxury",
+        view_more: "View More",
+        items_count: "items",
+        curated_label: "Curated For You",
+        curated_heading: "Featured Selections",
+        footer_rights: "All Rights Reserved",
+        tap_to_zoom: "Tap image to zoom",
+        inquire_whatsapp: "Inquire on WhatsApp",
+        search_placeholder: "Search products or specs...",
+        all_filter: "All",
+        no_results: "No matching items found."
+      }
+    };
+
+
+    function t(key) {
+      return (I18N[state.lang] && I18N[state.lang][key]) || key;
+    }
+
+
+    function showToast(msg) {
+      const el = document.getElementById("toast");
+      el.textContent = msg;
+      el.classList.remove("hidden");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => el.classList.add("hidden"), 3200);
+    }
+
+
+    function formatPrice(price, currency = "EGP") {
+      const num = Number(price || 0);
+      const formatted = num.toLocaleString("en-US");
+      return currency === "USD" ? `$ ${formatted}` : `EGP  ${formatted}`;
+    }
+
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+
+    function formatDescriptionHtml(text) {
+      if (!text) return "";
+      const lines = escapeHtml(text).split(/\r?\n/);
+      return lines.map(line => {
+        const trimmed = line.trim();
+        if (!trimmed) return '<div class="h-1.5"></div>';
+        const bolded = trimmed.replace(/\*\*(.+?)\*\*/g, '<strong class="text-[#0B132B] font-bold">$1</strong>');
+        if (trimmed.startsWith("•") || trimmed.startsWith("-")) {
+          return `<div class="flex items-start gap-2"><span class="text-[#C8A236] font-bold mt-0.5">•</span><span>${bolded.replace(/^[•\-]\s*/, "")}</span></div>`;
+        }
+        return `<p>${bolded}</p>`;
+      }).join("");
+    }
+
+
+    function stripMarkdown(text) {
+      return String(text || "").replace(/\*\*/g, "").replace(/\n+/g, " • ");
+    }
+
+
+    function pickRandomSelection() {
+      const shuffled = [...state.products].sort(() => Math.random() - 0.5);
+      state.randomIds = shuffled.slice(0, 10).map(p => p.id);
+    }
+
+
+    // =========================================================================
+    // 4. محرك Firebase + التخزين المحلي
+    // =========================================================================
+    async function initFirebaseAndData() {
+      if (!isFirebaseConfigured) {
+        loadLocalProducts();
+        pickRandomSelection();
+        handleHashRoute();
+        return;
+      }
+
+
+      try {
+        const [appMod, authMod, fsMod] = await Promise.all([
+          import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js"),
+          import("https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js"),
+          import("https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js")
+        ]);
+
+
+        const app = appMod.initializeApp(USER_FIREBASE_CONFIG);
+        const auth = authMod.getAuth(app);
+        const db = fsMod.getFirestore(app);
+        state.fb = { app, auth, db, authMod, fsMod };
+
+
+        authMod.onAuthStateChanged(auth, (user) => {
+          state.user = user;
+          state.authReady = true;
+          if (state.view === "admin") render();
+        });
+
+
+        await loadFirestoreProducts();
+      } catch (err) {
+        console.error("Firebase init failed, using local fallback:", err);
+        loadLocalProducts();
+      }
+
+
+      pickRandomSelection();
+      handleHashRoute();
+    }
+
+
+    function loadLocalProducts() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            state.products = parsed;
+            return;
+          }
+        }
+      } catch (e) {}
+      state.products = structuredClone(INITIAL_PRODUCTS);
+    }
+
+
+    function saveLocalProducts() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state.products));
+      } catch (e) {
+        showToast("مساحة التخزين المحلي ممتلئة — اربط Firebase لحفظ صور أكثر.");
+      }
+    }
+
+
+    async function loadFirestoreProducts() {
+      const { db, fsMod } = state.fb;
+      const snap = await fsMod.getDocs(fsMod.collection(db, "products"));
+      if (snap.empty) {
+        state.products = structuredClone(INITIAL_PRODUCTS);
+        state.firestoreEmpty = true;
+      } else {
+        state.firestoreEmpty = false;
+        const list = [];
+        snap.forEach(d => {
+          const data = d.data();
+          list.push({
+            id: d.id,
+            ...data,
+            images: data.coverImage ? [data.coverImage] : (data.images || [])
+          });
+        });
+        list.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+        state.products = list;
+      }
+    }
+
+
+    async function fetchProductFullImages(product) {
+      if (!isFirebaseConfigured || !state.fb || state.firestoreEmpty) {
+        return product.images && product.images.length
+          ? product.images
+          : [makeLuxuryPlaceholder(product.category, product.title)];
+      }
+      try {
+        const { db, fsMod } = state.fb;
+        const colRef = fsMod.collection(db, "products", product.id, "images");
+        const snap = await fsMod.getDocs(colRef);
+        if (!snap.empty) {
+          const imgs = [];
+          snap.forEach(d => imgs.push({ idx: d.data().index ?? 0, data: d.data().data }));
+          imgs.sort((a, b) => a.idx - b.idx);
+          return imgs.map(i => i.data);
+        }
+      } catch (e) {
+        console.warn("Could not load subcollection images:", e);
+      }
+      return product.images && product.images.length
+        ? product.images
+        : [makeLuxuryPlaceholder(product.category, product.title)];
+    }
+
+
+    async function saveProductToBackend(productObj, imagesArray) {
+      const finalImages = imagesArray.length > 0
+        ? imagesArray.slice(0, MAX_IMAGES_PER_PRODUCT)
+        : [makeLuxuryPlaceholder(productObj.category, productObj.title)];
+
+
+      if (!isFirebaseConfigured || !state.fb) {
+        const fullObj = { ...productObj, images: finalImages, createdAt: productObj.createdAt || Date.now() };
+        const idx = state.products.findIndex(p => p.id === fullObj.id);
+        if (idx >= 0) state.products[idx] = fullObj;
+        else state.products.unshift(fullObj);
+        saveLocalProducts();
+        return;
+      }
+
+
+      const { db, fsMod } = state.fb;
+      const docRef = fsMod.doc(db, "products", productObj.id);
+      const payload = {
+        category: productObj.category,
+        subcategory: productObj.subcategory || "",
+        title: productObj.title,
+        price: Number(productObj.price || 0),
+        currency: productObj.currency || "EGP",
+        description: productObj.description || "",
+        coverImage: finalImages[0],
+        imageCount: finalImages.length,
+        createdAt: productObj.createdAt || Date.now(),
+        updatedAt: Date.now()
+      };
+      await fsMod.setDoc(docRef, payload);
+
+
+      // Clear old subcollection images and write up to 15 high-res images safely
+      const imgCol = fsMod.collection(db, "products", productObj.id, "images");
+      const oldSnap = await fsMod.getDocs(imgCol);
+      for (const oldDoc of oldSnap.docs) {
+        await fsMod.deleteDoc(oldDoc.ref);
+      }
+      for (let i = 0; i < finalImages.length; i++) {
+        await fsMod.setDoc(fsMod.doc(db, "products", productObj.id, "images", `img_${String(i).padStart(2, "0")}`), {
+          index: i,
+          data: finalImages[i]
+        });
+      }
+
+
+      await loadFirestoreProducts();
+    }
+
+
+    async function deleteProductFromBackend(productId) {
+      if (!isFirebaseConfigured || !state.fb) {
+        state.products = state.products.filter(p => p.id !== productId);
+        saveLocalProducts();
+        return;
+      }
+      const { db, fsMod } = state.fb;
+      const imgCol = fsMod.collection(db, "products", productId, "images");
+      const oldSnap = await fsMod.getDocs(imgCol);
+      for (const oldDoc of oldSnap.docs) {
+        await fsMod.deleteDoc(oldDoc.ref);
+      }
+      await fsMod.deleteDoc(fsMod.doc(db, "products", productId));
+      await loadFirestoreProducts();
+    }
+
+
+    window.seedInitialToFirebase = async function () {
+      if (!isFirebaseConfigured || !state.fb) return;
+      showToast("جاري رفع المنتجات الأساسية الـ 20 إلى Firebase...");
+      try {
+        for (const p of INITIAL_PRODUCTS) {
+          await saveProductToBackend(p, p.images);
+        }
+        state.firestoreEmpty = false;
+        showToast("تم رفع جميع المنتجات الأساسية بنجاح!");
+        render();
+      } catch (err) {
+        console.error(err);
+        showToast("حدث خطأ أثناء الرفع. تأكد من صلاحيات Rules في Firestore.");
+      }
+    };
+
+
+    // =========================================================================
+    // 5. التنقل والواجهات (Home / Category / Admin)
+    // =========================================================================
+    function handleHashRoute() {
+      const hash = window.location.hash || "";
+      if (hash === "#/admin") {
+        state.view = "admin";
+      } else if (hash.startsWith("#/category/")) {
+        const catId = hash.replace("#/category/", "");
+        if (CATEGORIES.some(c => c.id === catId)) {
+          state.view = "category";
+          state.activeCategoryId = catId;
+        } else {
+          state.view = "home";
+        }
+      } else {
+        state.view = "home";
+      }
+      render();
+    }
+
+
+    window.addEventListener("hashchange", handleHashRoute);
+
+
+    window.goHome = function () {
+      window.location.hash = "";
+      state.view = "home";
+      state.activeCategoryId = null;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      render();
+    };
+
+
+    window.openCategory = function (catId) {
+      state.activeCategoryId = catId;
+      state.categorySearch = "";
+      state.categorySubFilter = "all";
+      window.location.hash = `#/category/${catId}`;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+
+    window.openAdminRoute = function () {
+      window.location.hash = "#/admin";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+
+    window.toggleLanguage = function () {
+      state.lang = state.lang === "ar" ? "en" : "ar";
+      document.documentElement.lang = state.lang;
+      document.documentElement.dir = state.lang === "ar" ? "rtl" : "ltr";
+
+
+      const arBadge = document.getElementById("lang-ar-badge");
+      const enBadge = document.getElementById("lang-en-badge");
+      if (state.lang === "ar") {
+        arBadge.className = "px-2.5 py-1 rounded-full gold-gradient text-[#0B132B] transition";
+        enBadge.className = "px-2.5 py-1 rounded-full text-gray-500 transition";
+      } else {
+        enBadge.className = "px-2.5 py-1 rounded-full gold-gradient text-[#0B132B] transition";
+        arBadge.className = "px-2.5 py-1 rounded-full text-gray-500 transition";
+      }
+      render();
+    };
+
+
+    function renderProductCard(p) {
+      const thumb = (p.images && p.images[0]) || makeLuxuryPlaceholder(p.category, p.title);
+      const excerpt = stripMarkdown(p.description).slice(0, 95);
+      return `
+        <article onclick="openProductModal('${p.id}')" class="bg-white rounded-3xl border border-gray-100 card-shadow overflow-hidden cursor-pointer flex items-stretch min-h-[155px] sm:min-h-[170px]">
+          <div class="flex-1 p-4 sm:p-5 flex flex-col justify-between min-w-0">
+            <div>
+              ${p.subcategory ? `<div class="text-[11px] font-semibold text-gray-400 mb-1">${escapeHtml(p.subcategory)}</div>` : ""}
+              <h3 class="font-luxury text-base sm:text-lg font-bold text-[#0B132B] leading-snug line-clamp-2 mb-1.5">${escapeHtml(p.title)}</h3>
+              <p class="text-xs text-gray-500 leading-relaxed line-clamp-2">${escapeHtml(excerpt)}...</p>
+            </div>
+            <div class="mt-3 flex items-center gap-2">
+              <div class="price-pill text-[#0B132B] font-extrabold text-xs sm:text-sm px-4 py-2 rounded-full inline-flex items-center gap-1.5 whitespace-nowrap">
+                <span>${formatPrice(p.price, p.currency)}</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-[#0B132B]/50"></span>
+              </div>
+              <div class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 shrink-0">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 4.5-15 15m0 0h11.25m-11.25 0V8.25"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="w-36 sm:w-48 shrink-0 bg-[#0B132B] relative overflow-hidden">
+            <img src="${thumb}" alt="${escapeHtml(p.title)}" loading="lazy" class="w-full h-full object-cover" />
+            ${(p.imageCount || (p.images && p.images.length) || 1) > 1 ? `
+              <span class="absolute bottom-2 left-2 bg-black/65 text-white text-[10px] font-bold px-2 py-0.5 rounded-full backdrop-blur-sm">
+                📷 ${p.imageCount || p.images.length}
+              </span>` : ""}
+          </div>
+        </article>
+      `;
+    }
+
+
+    function renderHomeView() {
+      const catCardsHtml = CATEGORIES.map(cat => {
+        const count = state.products.filter(p => p.category === cat.id).length;
+        const tags = state.lang === "ar" ? cat.tagsAr : cat.tagsEn;
+        return `
+          <div onclick="openCategory('${cat.id}')" class="relative rounded-3xl overflow-hidden cursor-pointer card-shadow bg-gradient-to-br from-[#1C2434] via-[#111827] to-[#0B132B] text-white p-5 sm:p-6 border border-[#C8A236]/25">
+            <div class="flex items-start justify-between gap-3 mb-4">
+              <div>
+                <span class="inline-block text-xs font-bold text-[#E3C265] bg-[#E3C265]/15 px-3 py-1 rounded-full mb-2">${count} ${t("items_count")}</span>
+                <h3 class="font-luxury text-2xl font-bold tracking-wide">${cat.name}</h3>
+                <p class="text-xs text-gray-300 mt-1">${state.lang === "ar" ? cat.arSubtitle : cat.enSubtitle}</p>
+              </div>
+              <div class="w-12 h-12 rounded-2xl bg-[#0B132B] border border-[#E3C265]/40 flex items-center justify-center shrink-0">
+                <span class="font-luxury text-[#E3C265] text-xl font-bold">M</span>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2 mb-4">
+              ${tags.map(tg => `<span class="text-[11px] bg-white/10 text-gray-100 px-3 py-1 rounded-full">${tg}</span>`).join("")}
+            </div>
+            <div class="flex items-center justify-end text-xs font-bold text-[#E3C265] gap-1">
+              <span>${t("view_more")}</span>
+              <span>${state.lang === "ar" ? "←" : "→"}</span>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+
+      // 3 products per category with clickable Header AND "View More" button directly BELOW the 3 products
+      const categorySectionsHtml = CATEGORIES.map(cat => {
+        const items = state.products.filter(p => p.category === cat.id);
+        const topThree = items.slice(0, 3);
+        return `
+          <section class="mt-12">
+            <!-- Clickable Category Header -->
+            <div onclick="openCategory('${cat.id}')" class="flex items-center justify-between gap-3 mb-5 cursor-pointer group">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-[#0B132B] border border-[#C8A236]/50 flex items-center justify-center shadow-sm group-hover:scale-105 transition">
+                  <span class="font-luxury text-[#E3C265] font-bold text-lg">M</span>
+                </div>
+                <div>
+                  <h2 class="font-luxury text-2xl font-bold text-[#0B132B] group-hover:text-[#A67E19] transition">${cat.name}</h2>
+                  <p class="text-xs text-gray-500 font-semibold">${items.length} ${t("items_count")}</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-[#A67E19] group-hover:underline">${t("view_more")} ${state.lang === "ar" ? "←" : "→"}</span>
+            </div>
+
+
+            <!-- Exactly 3 Products -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${topThree.map(renderProductCard).join("")}
+            </div>
+
+
+            <!-- View More Button DIRECTLY BELOW the 3 products -->
+            <div class="mt-5 flex justify-center">
+              <button onclick="openCategory('${cat.id}')" class="px-8 py-2.5 rounded-full bg-white border border-[#C8A236]/60 text-[#0B132B] font-bold text-sm hover:bg-amber-50 hover:border-[#C8A236] shadow-sm transition flex items-center gap-2">
+                <span>${t("view_more")} — ${cat.name}</span>
+                <span>${state.lang === "ar" ? "←" : "→"}</span>
+              </button>
+            </div>
+          </section>
+        `;
+      }).join("");
+
+
+      // Random 10 products section (unchanged)
+      const randomProducts = state.randomIds
+        .map(id => state.products.find(p => p.id === id))
+        .filter(Boolean);
+      const displayRandom = randomProducts.length > 0 ? randomProducts : state.products.slice(0, 10);
+
+
+      return `
+        <!-- HERO SECTION (Clean Minimalist — NO "اسحب للاستكشاف") -->
+        <section class="pt-8 pb-6 text-center">
+          <div class="w-24 h-24 mx-auto bg-[#0B132B] rounded-2xl shadow-lg border border-[#C8A236]/50 flex flex-col items-center justify-center mb-6">
+            <span class="font-luxury text-4xl font-bold text-[#E3C265] leading-none">M</span>
+            <span class="text-[9px] tracking-[0.22em] text-[#E3C265] font-bold mt-1.5">MAGNET</span>
+            <span class="text-[7px] tracking-[0.2em] text-gray-300">GROUP</span>
+          </div>
+
+
+          <a href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" class="inline-flex items-center gap-2.5 gold-gradient text-[#0B132B] font-bold px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transition text-sm sm:text-base mb-7">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zM12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.986-1.418A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+            <span>${t("whatsapp_btn")}</span>
+          </a>
+
+
+          <h1 class="font-luxury text-4xl sm:text-5xl font-bold gold-text mb-4">Magnet Group</h1>
+          <p class="text-gray-600 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">${t("hero_subtitle")}</p>
+        </section>
+
+
+        <!-- CATEGORIES OVERVIEW -->
+        <section class="mt-8">
+          <div class="mb-5">
+            <span class="text-xs font-bold text-[#A67E19] tracking-wide">${t("sections_label")}</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0B132B] mt-1">${t("sections_heading")}</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            ${catCardsHtml}
+          </div>
+        </section>
+
+
+        <!-- 3 PRODUCTS PER CATEGORY -->
+        ${categorySectionsHtml}
+
+
+        <!-- RANDOM 10 SELECTIONS -->
+        <section class="mt-16 pt-10 border-t border-gray-200/80">
+          <div class="mb-6">
+            <span class="text-xs font-bold text-[#A67E19]">${t("curated_label")}</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0B132B] mt-1">${t("curated_heading")}</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            ${displayRandom.map(renderProductCard).join("")}
+          </div>
+        </section>
+      `;
+    }
+
+
+    function renderCategoryView() {
+      const cat = CATEGORIES.find(c => c.id === state.activeCategoryId) || CATEGORIES[0];
+      const allInCat = state.products.filter(p => p.category === cat.id);
+      const subs = [...new Set(allInCat.map(p => p.subcategory).filter(Boolean))];
+
+
+      const filtered = allInCat.filter(p => {
+        const matchSub = state.categorySubFilter === "all" || p.subcategory === state.categorySubFilter;
+        const q = state.categorySearch.trim().toLowerCase();
+        const matchSearch = !q || p.title.toLowerCase().includes(q) || (p.description || "").toLowerCase().includes(q);
+        return matchSub && matchSearch;
+      });
+
+
+      return `
+        <section class="pt-6">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h1 class="font-luxury text-3xl font-bold text-[#0B132B]">${cat.name}</h1>
+              <p class="text-xs text-gray-500 mt-1 font-semibold">${allInCat.length} ${t("items_count")}</p>
+            </div>
+            <div class="w-14 h-14 rounded-2xl bg-[#0B132B] border border-[#C8A236]/50 flex items-center justify-center">
+              <span class="font-luxury text-[#E3C265] text-2xl font-bold">M</span>
+            </div>
+          </div>
+
+
+          <!-- Search & Subcategory Filter -->
+          <div class="mb-6 space-y-3">
+            <input
+              type="text"
+              value="${escapeHtml(state.categorySearch)}"
+              oninput="window.updateCategorySearch(this.value)"
+              placeholder="${t("search_placeholder")}"
+              class="w-full bg-white border border-gray-200 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-[#C8A236] shadow-sm"
+            />
+            <div class="flex flex-wrap gap-2">
+              <button onclick="window.setCategorySub('all')" class="px-4 py-1.5 rounded-full text-xs font-bold transition ${state.categorySubFilter === 'all' ? 'gold-gradient text-[#0B132B]' : 'bg-white border border-gray-200 text-gray-600'}">${t("all_filter")}</button>
+              ${subs.map(s => `
+                <button onclick="window.setCategorySub('${escapeHtml(s)}')" class="px-4 py-1.5 rounded-full text-xs font-bold transition ${state.categorySubFilter === s ? 'gold-gradient text-[#0B132B]' : 'bg-white border border-gray-200 text-gray-600'}">${escapeHtml(s)}</button>
+              `).join("")}
+            </div>
+          </div>
+
+
+          <!-- Products List -->
+          ${filtered.length > 0 ? `
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${filtered.map(renderProductCard).join("")}
+            </div>
+          ` : `
+            <div class="bg-white rounded-3xl p-12 text-center border border-gray-100 text-gray-500 font-semibold">${t("no_results")}</div>
+          `}
+        </section>
+      `;
+    }
+
+
+    window.updateCategorySearch = function (val) {
+      state.categorySearch = val;
+      render();
+      const input = document.querySelector("#app-root input[type='text']");
+      if (input) {
+        input.focus();
+        input.setSelectionRange(val.length, val.length);
+      }
+    };
+
+
+    window.setCategorySub = function (sub) {
+      state.categorySubFilter = sub;
+      render();
+    };
+
+
+    // =========================================================================
+    // 6. لوحة تحكم المالك فقط (alialdiasty22@gmail.com)
+    // =========================================================================
+    function isOwnerAuthorized() {
+      if (isFirebaseConfigured) {
+        return Boolean(state.user && state.user.email && state.user.email.toLowerCase() === OWNER_EMAIL.toLowerCase());
+      }
+      return state.localAdminUnlocked;
+    }
+
+
+    window.adminSignInGoogle = async function () {
+      if (!isFirebaseConfigured || !state.fb) return;
+      try {
+        const provider = new state.fb.authMod.GoogleAuthProvider();
+        provider.setCustomParameters({ prompt: "select_account" });
+        await state.fb.authMod.signInWithPopup(state.fb.auth, provider);
+      } catch (e) {
+        console.error(e);
+        showToast("لم يتم تسجيل الدخول. تأكد من إضافة الدومين في Authorized Domains بـ Firebase.");
+      }
+    };
+
+
+    window.adminSignOut = async function () {
+      if (isFirebaseConfigured && state.fb) {
+        await state.fb.authMod.signOut(state.fb.auth);
+      } else {
+        state.localAdminUnlocked = false;
+      }
+      render();
+    };
+
+
+    window.unlockLocalPreview = function () {
+      const inp = document.getElementById("local-owner-email-input");
+      const entered = (inp ? inp.value : "").trim().toLowerCase();
+      if (entered === OWNER_EMAIL.toLowerCase()) {
+        state.localAdminUnlocked = true;
+        render();
+      } else {
+        showToast("هذا البريد الإلكتروني لا يملك الموقع!");
+      }
+    };
+
+
+    function renderAdminView() {
+      // Loading Firebase Auth
+      if (isFirebaseConfigured && !state.authReady) {
+        return `<div class="py-24 text-center text-gray-500 font-semibold">جاري التحقق من صلاحية المالك...</div>`;
+      }
+
+
+      // Case A: Firebase configured, NOT signed in yet
+      if (isFirebaseConfigured && !state.user) {
+        return `
+          <div class="max-w-md mx-auto mt-14 bg-white rounded-3xl p-8 border border-gray-100 card-shadow text-center">
+            <div class="w-14 h-14 rounded-full bg-amber-50 border border-amber-200 mx-auto flex items-center justify-center text-[#A67E19] mb-4">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+            </div>
+            <h2 class="text-xl font-extrabold text-[#0B132B] mb-2">لوحة تحكم المالك</h2>
+            <p class="text-xs text-gray-500 mb-6">الدخول مقصور حصرياً على حساب المالك المسجل فقط.</p>
+            <button onclick="adminSignInGoogle()" class="w-full gold-gradient text-[#0B132B] font-bold py-3.5 rounded-2xl shadow-md transition">
+              تسجيل الدخول بحساب جوجل
+            </button>
+            <button onclick="goHome()" class="mt-4 text-xs text-gray-500 hover:underline">العودة للرئيسية</button>
+          </div>
+        `;
+      }
+
+
+      // Case B: Firebase configured, signed in with WRONG account -> Exact Lock Screen
+      if (isFirebaseConfigured && state.user && !isOwnerAuthorized()) {
+        return `
+          <div class="max-w-md mx-auto mt-14 bg-white rounded-3xl p-8 border border-gray-100 card-shadow text-center">
+            <div class="w-14 h-14 rounded-full bg-gray-100 mx-auto flex items-center justify-center text-gray-500 mb-4">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+            </div>
+            <h2 class="text-xl font-extrabold text-[#0B132B] mb-2">هذا الحساب لا يملك الموقع</h2>
+            <p class="text-xs text-gray-500 mb-6">أنت مسجل بحساب آخر (${escapeHtml(state.user.email)}). سجل الخروج ثم ادخل بحساب المالك.</p>
+            <button onclick="adminSignOut().then(() => adminSignInGoogle())" class="w-full gold-gradient text-[#0B132B] font-bold py-3.5 rounded-2xl shadow-md transition">
+              تغيير الحساب
+            </button>
+            <button onclick="goHome()" class="mt-4 text-xs text-gray-500 hover:underline block mx-auto">العودة للرئيسية</button>
+          </div>
+        `;
+      }
+
+
+      // Case C: Local Preview Mode (before Firebase keys are pasted)
+      if (!isFirebaseConfigured && !state.localAdminUnlocked) {
+        return `
+          <div class="max-w-md mx-auto mt-12 bg-white rounded-3xl p-7 border border-gray-100 card-shadow text-center">
+            <div class="w-14 h-14 rounded-full bg-amber-50 border border-amber-200 mx-auto flex items-center justify-center text-[#A67E19] mb-4">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+            </div>
+            <h2 class="text-xl font-extrabold text-[#0B132B] mb-2">وضع المعاينة المحلية (قبل ربط Firebase)</h2>
+            <p class="text-xs text-gray-500 leading-relaxed mb-5">
+              بريد المالك المعتمد في الكود هو:<br>
+              <strong class="text-[#0B132B] font-mono">${OWNER_EMAIL}</strong><br>
+              بمجرد وضع بيانات <code>USER_FIREBASE_CONFIG</code> سيتم التحقق تلقائياً بحساب جوجل الحقيقي ومنع أي شخص آخر.
+            </p>
+            <input id="local-owner-email-input" type="email" placeholder="اكتب بريد المالك للتجربة المحلية" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm mb-3 text-center focus:outline-none focus:border-[#C8A236]" />
+            <button onclick="unlockLocalPreview()" class="w-full gold-gradient text-[#0B132B] font-bold py-3 rounded-2xl shadow-md">دخول المالك (معاينة)</button>
+            <button onclick="goHome()" class="mt-4 text-xs text-gray-500 hover:underline block mx-auto">العودة للرئيسية</button>
+          </div>
+        `;
+      }
+
+
+      // Case D: AUTHORIZED OWNER DASHBOARD
+      const editingItem = state.editingProductId
+        ? state.products.find(p => p.id === state.editingProductId)
+        : null;
+
+
+      const filteredAdminProducts = state.products.filter(p => {
+        const q = state.adminSearch.trim().toLowerCase();
+        return !q || p.title.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
+      });
+
+
+      return `
+        <section class="pt-6 space-y-6">
+          <!-- Admin Top Header -->
+          <div class="bg-[#0B132B] text-white rounded-3xl p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <span class="text-xs text-[#E3C265] font-bold">لوحة تحكم المالك • Magnet Group</span>
+              <h1 class="text-xl sm:text-2xl font-extrabold mt-1">إدارة المنتجات والصور</h1>
+              <p class="text-xs text-gray-300 mt-1 font-mono">${OWNER_EMAIL} ${isFirebaseConfigured ? "(متصل بـ Firebase ✅)" : "(وضع تجريبي محلي ⚠️)"}</p>
+            </div>
+            <div class="flex items-center gap-2">
+              ${isFirebaseConfigured && state.firestoreEmpty ? `
+                <button onclick="seedInitialToFirebase()" class="px-4 py-2 rounded-xl gold-gradient text-[#0B132B] text-xs font-extrabold shadow">
+                  رفع الـ 20 منتج لقاعدة البيانات
+                </button>
+              ` : ""}
+              <button onclick="adminSignOut()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold">تسجيل الخروج</button>
+            </div>
+          </div>
+
+
+          <!-- ADD / EDIT PRODUCT FORM (Single Title + Single Description + Up to 15 Images) -->
+          <div class="bg-white rounded-3xl p-5 sm:p-7 border border-gray-100 card-shadow">
+            <div class="flex items-center justify-between mb-5">
+              <h2 class="text-lg font-extrabold text-[#0B132B]">
+                ${editingItem ? "تعديل المنتج" : "إضافة منتج جديد"}
+              </h2>
+              ${editingItem ? `<button onclick="cancelEditProduct()" class="text-xs font-bold text-red-500 hover:underline">إلغاء التعديل</button>` : ""}
+            </div>
+
+
+            <form id="admin-product-form" onsubmit="submitProductForm(event)" class="space-y-4">
+              <!-- Category & Subcategory -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-gray-600 mb-1.5">القسم الرئيسي</label>
+                  <select id="f-category" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:border-[#C8A236]">
+                    ${CATEGORIES.map(c => `<option value="${c.id}" ${editingItem && editingItem.category === c.id ? "selected" : ""}>${c.name}</option>`).join("")}
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-600 mb-1.5">التصنيف الفرعي (مثال: دفع رباعي / فيلا / أجهزة منزلية)</label>
+                  <input id="f-subcategory" type="text" value="${escapeHtml(editingItem ? editingItem.subcategory : "")}" placeholder="دفع رباعي" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#C8A236]" />
+                </div>
+              </div>
+
+
+              <!-- SINGLE TITLE FIELD (Arabic or English freely) -->
+              <div>
+                <label class="block text-xs font-bold text-gray-600 mb-1.5">العنوان (عربي أو إنجليزي في خانة واحدة)</label>
+                <input id="f-title" type="text" required value="${escapeHtml(editingItem ? editingItem.title : "")}" placeholder="مثال: Porsche Cayenne Coupe 2024 – Nardo Grey" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:border-[#C8A236]" />
+              </div>
+
+
+              <!-- Price & Currency -->
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div class="col-span-1 sm:col-span-2">
+                  <label class="block text-xs font-bold text-gray-600 mb-1.5">السعر (أرقام فقط)</label>
+                  <input id="f-price" type="number" required min="0" step="any" value="${editingItem ? editingItem.price : ""}" placeholder="8000000" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-bold focus:outline-none focus:border-[#C8A236]" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-600 mb-1.5">العملة</label>
+                  <select id="f-currency" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-bold focus:outline-none focus:border-[#C8A236]">
+                    <option value="EGP" ${!editingItem || editingItem.currency === "EGP" ? "selected" : ""}>EGP (جنيه)</option>
+                    <option value="USD" ${editingItem && editingItem.currency === "USD" ? "selected" : ""}>USD (دولار)</option>
+                  </select>
+                </div>
+              </div>
+
+
+              <!-- SINGLE DESCRIPTION FIELD -->
+              <div>
+                <label class="block text-xs font-bold text-gray-600 mb-1.5">الوصف (عربي أو إنجليزي — استخدم • للنقاط و **للعناوين العريضة**)</label>
+                <textarea id="f-description" rows="6" required placeholder="اكتب مواصفات المنتج هنا..." class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm leading-relaxed focus:outline-none focus:border-[#C8A236]">${escapeHtml(editingItem ? editingItem.description : "")}</textarea>
+              </div>
+
+
+              <!-- MULTI IMAGE UPLOADER (UP TO 15 IMAGES) -->
+              <div class="bg-gray-50 rounded-2xl p-4 border border-dashed border-[#C8A236]/60">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                  <div>
+                    <span class="text-sm font-extrabold text-[#0B132B]">صور المنتج (مسموح حتى 15 صورة)</span>
+                    <span id="admin-img-count" class="mr-2 text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-[#9A7418]">${state.adminFormImages.length} / 15</span>
+                  </div>
+                  <label class="cursor-pointer px-4 py-2 rounded-xl gold-gradient text-[#0B132B] text-xs font-extrabold shadow-sm">
+                    + اختر صور من جهازك
+                    <input type="file" accept="image/*" multiple onchange="handleAdminImageFiles(event)" class="hidden" />
+                  </label>
+                </div>
+
+
+                <!-- Optional Image URL Input -->
+                <div class="flex gap-2 mb-3">
+                  <input id="f-img-url" type="url" placeholder="أو الصق رابط صورة مباشر (https://...)" class="flex-1 bg-white border border-gray-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-[#C8A236]" />
+                  <button type="button" onclick="addAdminImageUrl()" class="px-3 py-2 rounded-xl bg-[#0B132B] text-white text-xs font-bold">إضافة رابط</button>
+                </div>
+
+
+                <!-- Preview Grid -->
+                <div id="admin-images-grid" class="grid grid-cols-3 sm:grid-cols-5 gap-2.5">
+                  ${renderAdminImagesGridHtml()}
+                </div>
+              </div>
+
+
+              <button id="admin-submit-btn" type="submit" class="w-full gold-gradient text-[#0B132B] font-extrabold py-3.5 rounded-2xl shadow-md text-base transition">
+                ${editingItem ? "حفظ التعديلات" : "نشر المنتج في الموقع"}
+              </button>
+            </form>
+          </div>
+
+
+          <!-- EXISTING PRODUCTS LIST -->
+          <div class="bg-white rounded-3xl p-5 sm:p-6 border border-gray-100 card-shadow">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+              <h2 class="text-lg font-extrabold text-[#0B132B]">المنتجات الحالية (${state.products.length})</h2>
+              <input
+                type="text"
+                value="${escapeHtml(state.adminSearch)}"
+                oninput="window.updateAdminSearch(this.value)"
+                placeholder="بحث في المنتجات..."
+                class="bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-xs w-56 focus:outline-none focus:border-[#C8A236]"
+              />
+            </div>
+
+
+            <div class="divide-y divide-gray-100">
+              ${filteredAdminProducts.map(p => `
+                <div class="py-3.5 flex items-center justify-between gap-3">
+                  <div class="flex items-center gap-3 min-w-0">
+                    <img src="${(p.images && p.images[0]) || makeLuxuryPlaceholder(p.category, p.title)}" class="w-14 h-14 rounded-xl object-cover bg-[#0B132B] shrink-0" />
+                    <div class="min-w-0">
+                      <div class="font-bold text-sm text-[#0B132B] truncate">${escapeHtml(p.title)}</div>
+                      <div class="text-xs text-gray-500 mt-0.5">${formatPrice(p.price, p.currency)} • ${p.category}</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2 shrink-0">
+                    <button onclick="startEditProduct('${p.id}')" class="px-3 py-1.5 rounded-lg bg-amber-50 text-[#9A7418] text-xs font-bold hover:bg-amber-100">تعديل</button>
+                    <button onclick="confirmDeleteProduct('${p.id}')" class="px-3 py-1.5 rounded-lg bg-red-50 text-red-600 text-xs font-bold hover:bg-red-100">حذف</button>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+
+    function renderAdminImagesGridHtml() {
+      if (state.adminFormImages.length === 0) {
+        return `<div class="col-span-full text-center py-4 text-xs text-gray-400">لم تُضف صور بعد (يمكنك إضافة حتى 15 صورة، والصورة الأولى ستكون الغلاف الرئيسي).</div>`;
+      }
+      return state.adminFormImages.map((src, i) => `
+        <div class="relative group rounded-xl overflow-hidden aspect-square bg-[#0B132B] border-2 ${i === 0 ? "border-[#C8A236]" : "border-transparent"}">
+          <img src="${src}" class="w-full h-full object-cover" />
+          ${i === 0 ? `<span class="absolute top-1 right-1 bg-[#C8A236] text-[#0B132B] text-[9px] font-extrabold px-1.5 py-0.5 rounded">الرئيسية</span>` : `
+            <button type="button" onclick="setAdminMainImage(${i})" class="absolute top-1 right-1 bg-black/70 text-white text-[9px] px-1.5 py-0.5 rounded hover:bg-[#C8A236] hover:text-[#0B132B]">جعلها رئيسية</button>
+          `}
+          <button type="button" onclick="removeAdminImage(${i})" class="absolute bottom-1 left-1 w-6 h-6 rounded-full bg-red-600/90 text-white text-xs font-bold flex items-center justify-center">×</button>
+        </div>
+      `).join("");
+    }
+
+
+    function refreshAdminImagePreview() {
+      const grid = document.getElementById("admin-images-grid");
+      const badge = document.getElementById("admin-img-count");
+      if (grid) grid.innerHTML = renderAdminImagesGridHtml();
+      if (badge) badge.textContent = `${state.adminFormImages.length} / ${MAX_IMAGES_PER_PRODUCT}`;
+    }
+
+
+    function compressImageFile(file, maxWidth = 1200, quality = 0.78) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            let w = img.width;
+            let h = img.height;
+            if (w > maxWidth) {
+              h = Math.round((h * maxWidth) / w);
+              w = maxWidth;
+            }
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, w, h);
+            resolve(canvas.toDataURL("image/jpeg", quality));
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+
+    window.handleAdminImageFiles = async function (event) {
+      const files = Array.from(event.target.files || []);
+      const remaining = MAX_IMAGES_PER_PRODUCT - state.adminFormImages.length;
+      if (remaining <= 0) {
+        showToast(`الحد الأقصى هو ${MAX_IMAGES_PER_PRODUCT} صورة للمنتج الواحد.`);
+        return;
+      }
+      const toProcess = files.slice(0, remaining);
+      if (files.length > remaining) {
+        showToast(`تم اختيار أول ${remaining} صورة فقط للوصول للحد الأقصى (15 صورة).`);
+      }
+      for (const file of toProcess) {
+        try {
+          const dataUrl = await compressImageFile(file);
+          state.adminFormImages.push(dataUrl);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      event.target.value = "";
+      refreshAdminImagePreview();
+    };
+
+
+    window.addAdminImageUrl = function () {
+      const inp = document.getElementById("f-img-url");
+      const url = (inp ? inp.value : "").trim();
+      if (!url) return;
+      if (state.adminFormImages.length >= MAX_IMAGES_PER_PRODUCT) {
+        showToast(`الحد الأقصى هو ${MAX_IMAGES_PER_PRODUCT} صورة.`);
+        return;
+      }
+      state.adminFormImages.push(url);
+      inp.value = "";
+      refreshAdminImagePreview();
+    };
+
+
+    window.setAdminMainImage = function (index) {
+      if (index <= 0 || index >= state.adminFormImages.length) return;
+      const [chosen] = state.adminFormImages.splice(index, 1);
+      state.adminFormImages.unshift(chosen);
+      refreshAdminImagePreview();
+    };
+
+
+    window.removeAdminImage = function (index) {
+      state.adminFormImages.splice(index, 1);
+      refreshAdminImagePreview();
+    };
+
+
+    window.startEditProduct = async function (id) {
+      const p = state.products.find(x => x.id === id);
+      if (!p) return;
+      state.editingProductId = id;
+      showToast("جاري تحميل صور المنتج...");
+      state.adminFormImages = [...(await fetchProductFullImages(p))];
+      render();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+
+    window.cancelEditProduct = function () {
+      state.editingProductId = null;
+      state.adminFormImages = [];
+      render();
+    };
+
+
+    window.submitProductForm = async function (event) {
+      event.preventDefault();
+      const btn = document.getElementById("admin-submit-btn");
+      btn.disabled = true;
+      btn.textContent = "جاري الحفظ...";
+
+
+      const existing = state.editingProductId
+        ? state.products.find(p => p.id === state.editingProductId)
+        : null;
+
+
+      const productObj = {
+        id: existing ? existing.id : `prod-${Date.now()}`,
+        category: document.getElementById("f-category").value,
+        subcategory: document.getElementById("f-subcategory").value.trim(),
+        title: document.getElementById("f-title").value.trim(),
+        price: Number(document.getElementById("f-price").value),
+        currency: document.getElementById("f-currency").value,
+        description: document.getElementById("f-description").value.trim(),
+        createdAt: existing ? existing.createdAt : Date.now()
+      };
+
+
+      try {
+        await saveProductToBackend(productObj, state.adminFormImages);
+        state.editingProductId = null;
+        state.adminFormImages = [];
+        pickRandomSelection();
+        showToast(existing ? "تم حفظ تعديلات المنتج بنجاح ✅" : "تم نشر المنتج الجديد بنجاح ✅");
+        render();
+      } catch (err) {
+        console.error(err);
+        showToast("فشل الحفظ. تأكد من صلاحيات Rules في Firebase.");
+        btn.disabled = false;
+        btn.textContent = existing ? "حفظ التعديلات" : "نشر المنتج في الموقع";
+      }
+    };
+
+
+    window.confirmDeleteProduct = async function (id) {
+      if (!confirm("هل أنت متأكد من حذف هذا المنتج نهائياً؟")) return;
+      try {
+        await deleteProductFromBackend(id);
+        pickRandomSelection();
+        showToast("تم حذف المنتج.");
+        render();
+      } catch (err) {
+        console.error(err);
+        showToast("تعذر الحذف. تأكد من اتصال Firebase.");
+      }
+    };
+
+
+    window.updateAdminSearch = function (val) {
+      state.adminSearch = val;
+      render();
+    };
+
+
+    // =========================================================================
+    // 7. نافذة تفاصيل المنتج + عارض الصور المكبّر (Interactive Lightbox)
+    // =========================================================================
+    window.openProductModal = async function (productId) {
+      const p = state.products.find(x => x.id === productId);
+      if (!p) return;
+
+
+      state.modalProduct = p;
+      state.modalImages = p.images && p.images.length ? [...p.images] : [makeLuxuryPlaceholder(p.category, p.title)];
+      state.modalImageIndex = 0;
+
+
+      const cat = CATEGORIES.find(c => c.id === p.category);
+      document.getElementById("modal-category-badge").textContent = cat ? cat.name : p.category;
+      document.getElementById("modal-sub-badge").textContent = p.subcategory || "";
+      document.getElementById("modal-title").textContent = p.title;
+      document.getElementById("modal-price").textContent = formatPrice(p.price, p.currency);
+      document.getElementById("modal-description").innerHTML = formatDescriptionHtml(p.description);
+
+
+      const waMsg = encodeURIComponent(`مرحباً Magnet Group، أستفسر عن:\n${p.title}\nالسعر: ${formatPrice(p.price, p.currency)}`);
+      document.getElementById("modal-wa-btn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`;
+
+
+      updateModalGalleryUI();
+      document.getElementById("product-modal").classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+
+
+      // Load full gallery (up to 15 images) from Firestore subcollection if available
+      const fullImages = await fetchProductFullImages(p);
+      if (state.modalProduct && state.modalProduct.id === p.id && fullImages.length > 0) {
+        state.modalImages = fullImages;
+        updateModalGalleryUI();
+      }
+    };
+
+
+    window.closeProductModal = function () {
+      document.getElementById("product-modal").classList.add("hidden");
+      document.body.style.overflow = "";
+    };
+
+
+    function updateModalGalleryUI() {
+      const imgs = state.modalImages;
+      const idx = state.modalImageIndex;
+      document.getElementById("modal-main-img").src = imgs[idx] || "";
+      document.getElementById("modal-img-counter").textContent = `${idx + 1} / ${imgs.length}`;
+
+
+      const prevBtn = document.getElementById("modal-prev-img");
+      const nextBtn = document.getElementById("modal-next-img");
+      const thumbsEl = document.getElementById("modal-thumbs");
+
+
+      if (imgs.length > 1) {
+        prevBtn.classList.remove("hidden");
+        nextBtn.classList.remove("hidden");
+        thumbsEl.classList.remove("hidden");
+        thumbsEl.innerHTML = imgs.map((src, i) => `
+          <img
+            src="${src}"
+            onclick="selectModalImage(${i})"
+            class="w-16 h-12 object-cover rounded-lg cursor-pointer shrink-0 border-2 transition ${i === idx ? "border-[#E3C265] opacity-100" : "border-transparent opacity-55 hover:opacity-90"}"
+          />
+        `).join("");
+      } else {
+        prevBtn.classList.add("hidden");
+        nextBtn.classList.add("hidden");
+        thumbsEl.classList.add("hidden");
+      }
+    }
+
+
+    window.selectModalImage = function (index) {
+      state.modalImageIndex = index;
+      updateModalGalleryUI();
+    };
+
+
+    window.stepModalImage = function (delta) {
+      const len = state.modalImages.length;
+      if (len <= 1) return;
+      state.modalImageIndex = (state.modalImageIndex + delta + len) % len;
+      updateModalGalleryUI();
+    };
+
+
+    // ==================== INTERACTIVE FULLSCREEN LIGHTBOX ====================
+    const lb = {
+      scale: 1,
+      x: 0,
+      y: 0,
+      dragging: false,
+      startX: 0,
+      startY: 0,
+      pinchStartDist: 0,
+      pinchStartScale: 1,
+      lastTap: 0
+    };
+
+
+    function applyLightboxTransform() {
+      const img = document.getElementById("lightbox-img");
+      img.style.transform = `translate(${lb.x}px, ${lb.y}px) scale(${lb.scale})`;
+      document.getElementById("lightbox-zoom-label").textContent = `${Math.round(lb.scale * 100)}%`;
+      img.style.cursor = lb.scale > 1 ? (lb.dragging ? "grabbing" : "grab") : "zoom-in";
+    }
+
+
+    window.resetLightboxZoom = function () {
+      lb.scale = 1;
+      lb.x = 0;
+      lb.y = 0;
+      applyLightboxTransform();
+    };
+
+
+    window.zoomLightbox = function (delta) {
+      lb.scale = Math.min(5, Math.max(1, +(lb.scale + delta).toFixed(2)));
+      if (lb.scale === 1) { lb.x = 0; lb.y = 0; }
+      applyLightboxTransform();
+    };
+
+
+    window.openLightboxCurrent = function () {
+      const imgs = state.modalImages;
+      if (!imgs || imgs.length === 0) return;
+      document.getElementById("lightbox-img").src = imgs[state.modalImageIndex];
+      document.getElementById("lightbox-counter").textContent = `${state.modalImageIndex + 1} / ${imgs.length}`;
+      document.getElementById("lb-prev").classList.toggle("hidden", imgs.length <= 1);
+      document.getElementById("lb-next").classList.toggle("hidden", imgs.length <= 1);
+      resetLightboxZoom();
+      document.getElementById("image-lightbox").classList.remove("hidden");
+    };
+
+
+    window.closeLightbox = function () {
+      document.getElementById("image-lightbox").classList.add("hidden");
+      resetLightboxZoom();
+    };
+
+
+    window.stepLightbox = function (delta) {
+      stepModalImage(delta);
+      const imgs = state.modalImages;
+      document.getElementById("lightbox-img").src = imgs[state.modalImageIndex];
+      document.getElementById("lightbox-counter").textContent = `${state.modalImageIndex + 1} / ${imgs.length}`;
+      resetLightboxZoom();
+    };
+
+
+    // Lightbox Mouse Wheel, Drag, Double-Click, and Mobile Pinch-to-Zoom
+    const lbViewport = document.getElementById("lightbox-viewport");
+
+
+    lbViewport.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      zoomLightbox(e.deltaY < 0 ? 0.35 : -0.35);
+    }, { passive: false });
+
+
+    lbViewport.addEventListener("dblclick", (e) => {
+      if (e.target.closest("button")) return;
+      if (lb.scale > 1) resetLightboxZoom();
+      else { lb.scale = 2.5; applyLightboxTransform(); }
+    });
+
+
+    lbViewport.addEventListener("mousedown", (e) => {
+      if (e.target.closest("button") || lb.scale <= 1) return;
+      lb.dragging = true;
+      lb.startX = e.clientX - lb.x;
+      lb.startY = e.clientY - lb.y;
+      applyLightboxTransform();
+    });
+
+
+    window.addEventListener("mousemove", (e) => {
+      if (!lb.dragging) return;
+      lb.x = e.clientX - lb.startX;
+      lb.y = e.clientY - lb.startY;
+      applyLightboxTransform();
+    });
+
+
+    window.addEventListener("mouseup", () => {
+      if (!lb.dragging) return;
+      lb.dragging = false;
+      applyLightboxTransform();
+    });
+
+
+    lbViewport.addEventListener("touchstart", (e) => {
+      if (e.target.closest("button")) return;
+      if (e.touches.length === 2) {
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        lb.pinchStartDist = Math.hypot(dx, dy);
+        lb.pinchStartScale = lb.scale;
+      } else if (e.touches.length === 1) {
+        const now = Date.now();
+        if (now - lb.lastTap < 280) {
+          if (lb.scale > 1) resetLightboxZoom();
+          else { lb.scale = 2.5; applyLightboxTransform(); }
+          lb.lastTap = 0;
+          return;
+        }
+        lb.lastTap = now;
+        if (lb.scale > 1) {
+          lb.dragging = true;
+          lb.startX = e.touches[0].clientX - lb.x;
+          lb.startY = e.touches[0].clientY - lb.y;
+        }
+      }
+    }, { passive: true });
+
+
+    lbViewport.addEventListener("touchmove", (e) => {
+      if (e.touches.length === 2 && lb.pinchStartDist > 0) {
+        e.preventDefault();
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const dist = Math.hypot(dx, dy);
+        lb.scale = Math.min(5, Math.max(1, +(lb.pinchStartScale * (dist / lb.pinchStartDist)).toFixed(2)));
+        if (lb.scale === 1) { lb.x = 0; lb.y = 0; }
+        applyLightboxTransform();
+      } else if (e.touches.length === 1 && lb.dragging && lb.scale > 1) {
+        e.preventDefault();
+        lb.x = e.touches[0].clientX - lb.startX;
+        lb.y = e.touches[0].clientY - lb.startY;
+        applyLightboxTransform();
+      }
+    }, { passive: false });
+
+
+    lbViewport.addEventListener("touchend", () => {
+      lb.dragging = false;
+      lb.pinchStartDist = 0;
+    });
+
+
+    window.addEventListener("keydown", (e) => {
+      const lbOpen = !document.getElementById("image-lightbox").classList.contains("hidden");
+      if (lbOpen) {
+        if (e.key === "Escape") closeLightbox();
+        if (e.key === "ArrowRight") stepLightbox(-1);
+        if (e.key === "ArrowLeft") stepLightbox(1);
+        if (e.key === "+" || e.key === "=") zoomLightbox(0.4);
+        if (e.key === "-") zoomLightbox(-0.4);
+      } else if (e.key === "Escape") {
+        closeProductModal();
+      }
+    });
+
+
+    // =========================================================================
+    // 8. دالة الرسم الرئيسية
+    // =========================================================================
+    function render() {
+      const root = document.getElementById("app-root");
+      const backBtn = document.getElementById("nav-back-btn");
+      backBtn.classList.toggle("hidden", state.view === "home");
+
+
+      if (state.view === "home") {
+        root.innerHTML = renderHomeView();
+      } else if (state.view === "category") {
+        root.innerHTML = renderCategoryView();
+      } else if (state.view === "admin") {
+        root.innerHTML = renderAdminView();
+      }
+
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        el.textContent = t(el.getAttribute("data-i18n"));
+      });
+    }
+
+
+    initFirebaseAndData();
+  </script>
+</body>
+</html>
