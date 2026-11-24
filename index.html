@@ -318,7 +318,7 @@
     const OWNER_EMAIL = "alialdiasty22@gmail.com";
     const WHATSAPP_NUMBER = "201551939156";
     const MAX_IMAGES_PER_PRODUCT = 15;
-    const SITE_SETTINGS_DOC_ID = "__site_settings__";
+    const SITE_SETTINGS_DOC_ID = "site-settings-config";
 
 
     // ✅ إعدادات Firebase المربوطة بمشروع magnet-group-21
@@ -1805,17 +1805,21 @@
             ctx.drawImage(img, 0, 0, w, h);
 
 
+            let resultUrl = "";
             if (type === "logo") {
               // Preserve transparent background for logos using WebP (or PNG fallback)
-              const webpUrl = canvas.toDataURL("image/webp", 0.85);
-              if (webpUrl.startsWith("data:image/webp")) {
-                resolve(webpUrl);
-              } else {
-                resolve(canvas.toDataURL("image/png"));
-              }
+              const webpUrl = canvas.toDataURL("image/webp", 0.82);
+              resultUrl = webpUrl.startsWith("data:image/webp")
+                ? webpUrl
+                : canvas.toDataURL("image/png");
             } else {
-              resolve(canvas.toDataURL("image/jpeg", 0.80));
+              resultUrl = canvas.toDataURL("image/jpeg", 0.78);
             }
+            // Safeguard against Firestore 1 MiB per-document limit
+            if (resultUrl.length > 750000) {
+              resultUrl = canvas.toDataURL("image/jpeg", 0.70);
+            }
+            resolve(resultUrl);
           };
           img.onerror = reject;
           img.src = e.target.result;
@@ -1906,7 +1910,8 @@
         render();
       } catch (err) {
         console.error(err);
-        showToast("تعذر الحفظ في Firebase. تأكد من اتصالك وصلاحيات Firestore Rules.");
+        const code = (err && (err.code || err.message)) ? ` (${err.code || err.message})` : "";
+        showToast("تعذر الحفظ في Firebase" + code);
         if (btn) {
           btn.disabled = false;
           btn.textContent = "حفظ إعدادات الموقع والأقسام";
