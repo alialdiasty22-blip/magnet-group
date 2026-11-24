@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>Magnet Group | سيارات فاخرة • عقارات • أثاث وأجهزة منزلية</title>
   <meta name="description" content="Magnet Group - اكتشف اختياراتنا المميزة من السيارات والعقارات، وجهّز منزلك بأرقى الأثاث والأجهزة المنزلية." />
+  <link id="dynamic-favicon" rel="icon" href="" />
 
 
   <!-- Google Fonts -->
@@ -139,22 +140,22 @@
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100">
     <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
       <!-- Brand / Back -->
-      <div class="flex items-center gap-3">
-        <button id="nav-back-btn" onclick="goHome()" class="hidden w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-50 transition" title="رجوع">
+      <div class="flex items-center gap-3 min-w-0">
+        <button id="nav-back-btn" onclick="goHome()" class="hidden w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-50 transition shrink-0" title="رجوع">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
         </button>
-        <div onclick="goHome()" class="flex items-center gap-2.5 cursor-pointer">
-          <div class="w-10 h-10 bg-[#0B132B] rounded-lg flex flex-col items-center justify-center border border-[#C8A236]/40 shadow-sm">
+        <div onclick="goHome()" class="flex items-center gap-2.5 cursor-pointer min-w-0">
+          <div id="header-site-logo" class="w-10 h-10 bg-[#0B132B] rounded-lg flex flex-col items-center justify-center border border-[#C8A236]/40 shadow-sm overflow-hidden shrink-0">
             <span class="font-luxury text-[#E3C265] text-lg font-bold leading-none">M</span>
             <span class="text-[6px] tracking-widest text-[#E3C265] font-semibold mt-0.5">MAGNET</span>
           </div>
-          <span class="font-luxury text-lg font-bold gold-text tracking-wide">Magnet Group</span>
+          <span id="header-site-name" class="font-luxury text-lg font-bold gold-text tracking-wide truncate">Magnet Group</span>
         </div>
       </div>
 
 
       <!-- Controls: Language Switch + Shield Admin Icon -->
-      <div class="flex items-center gap-2.5">
+      <div class="flex items-center gap-2.5 shrink-0">
         <!-- Language Toggle -->
         <button id="lang-toggle-btn" onclick="toggleLanguage()" class="flex items-center bg-white border border-gray-200 rounded-full p-0.5 shadow-sm text-xs font-bold">
           <span id="lang-ar-badge" class="px-2.5 py-1 rounded-full gold-gradient text-[#0B132B] transition">ع</span>
@@ -183,7 +184,7 @@
   <footer class="border-t border-gray-200/70 bg-white py-6 mt-auto">
     <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500">
       <div class="flex items-center gap-2">
-        <span class="font-luxury font-bold text-[#0B132B] text-sm">Magnet Group</span>
+        <span id="footer-site-name" class="font-luxury font-bold text-[#0B132B] text-sm">Magnet Group</span>
         <span>•</span>
         <span data-i18n="footer_rights">جميع الحقوق محفوظة</span>
       </div>
@@ -317,6 +318,7 @@
     const OWNER_EMAIL = "alialdiasty22@gmail.com";
     const WHATSAPP_NUMBER = "201551939156";
     const MAX_IMAGES_PER_PRODUCT = 15;
+    const SITE_SETTINGS_DOC_ID = "__site_settings__";
 
 
     // ✅ إعدادات Firebase المربوطة بمشروع magnet-group-21
@@ -345,6 +347,7 @@
       {
         id: "motors",
         name: "Magnet Motors",
+        adminLabel: "القسم الأول (السيارات)",
         arSubtitle: "سيارات فاخرة ومختارة",
         enSubtitle: "Luxury & Selected Cars",
         tagsAr: ["سيارات رياضية", "سيدان فاخرة", "دفع رباعي"],
@@ -354,6 +357,7 @@
       {
         id: "realestate",
         name: "Magnet Real Estate",
+        adminLabel: "القسم الثاني (العقارات)",
         arSubtitle: "عقارات استثنائية وفرص استثمارية",
         enSubtitle: "Exceptional Properties & Investments",
         tagsAr: ["فلل وقصور", "شاليهات الساحل", "شقق وتجاري"],
@@ -363,6 +367,7 @@
       {
         id: "home",
         name: "Magnet Home",
+        adminLabel: "القسم الثالث (المنزل والأثاث)",
         arSubtitle: "أرقى الأثاث والأجهزة المنزلية",
         enSubtitle: "Premium Furniture & Home Appliances",
         tagsAr: ["أجهزة منزلية", "أثاث مودرن", "تسليم فوري"],
@@ -370,6 +375,38 @@
         accent: "#1C1917"
       }
     ];
+
+
+    function createDefaultSiteSettings() {
+      return {
+        siteName: "Magnet Group",
+        siteLogo: "",
+        categories: {
+          motors: { name: "Magnet Motors", coverImage: "", logoImage: "" },
+          realestate: { name: "Magnet Real Estate", coverImage: "", logoImage: "" },
+          home: { name: "Magnet Home", coverImage: "", logoImage: "" }
+        }
+      };
+    }
+
+
+    function normalizeSiteSettings(raw) {
+      const def = createDefaultSiteSettings();
+      const merged = {
+        siteName: (raw && typeof raw.siteName === "string" && raw.siteName.trim()) ? raw.siteName.trim() : def.siteName,
+        siteLogo: (raw && typeof raw.siteLogo === "string") ? raw.siteLogo : "",
+        categories: {}
+      };
+      CATEGORIES.forEach(c => {
+        const src = raw && raw.categories && raw.categories[c.id] ? raw.categories[c.id] : {};
+        merged.categories[c.id] = {
+          name: (typeof src.name === "string" && src.name.trim()) ? src.name.trim() : c.name,
+          coverImage: typeof src.coverImage === "string" ? src.coverImage : "",
+          logoImage: typeof src.logoImage === "string" ? src.logoImage : ""
+        };
+      });
+      return merged;
+    }
 
 
     function makeLuxuryPlaceholder(categoryName, titleText) {
@@ -396,7 +433,7 @@
           <text x="400" y="305" text-anchor="middle" fill="#E3C265" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" font-weight="bold">${safeCat.toUpperCase()}</text>
           <line x1="290" y1="330" x2="510" y2="330" stroke="url(#gold)" stroke-width="1.5" stroke-opacity="0.6"/>
           <text x="400" y="375" text-anchor="middle" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="23" font-weight="bold">${safeTitle}</text>
-          <text x="400" y="420" text-anchor="middle" fill="#9CA3AF" font-family="Arial, sans-serif" font-size="14">Magnet Group Exclusive Collection</text>
+          <text x="400" y="420" text-anchor="middle" fill="#9CA3AF" font-family="Arial, sans-serif" font-size="14">Exclusive Collection</text>
         </svg>`;
       return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg.trim());
     }
@@ -810,9 +847,12 @@
 
 
     // =========================================================================
-    // 3. حالة التطبيق واللغة والبيانات
+    // 3. حالة التطبيق واللغة والبيانات وإعدادات الهوية والأقسام
     // =========================================================================
     const STORAGE_KEY = "magnet_group_products_v1";
+    const SETTINGS_STORAGE_KEY = "magnet_group_settings_v1";
+
+
     const state = {
       lang: "ar",
       view: "home", // 'home' | 'category' | 'admin'
@@ -821,6 +861,9 @@
       categorySubFilter: "all",
       products: [],
       randomIds: [],
+      firestoreEmpty: false,
+      // Site & Categories Branding Settings
+      siteSettings: createDefaultSiteSettings(),
       // Auth state
       user: null,
       authReady: !isFirebaseConfigured,
@@ -831,7 +874,9 @@
       modalProduct: null,
       modalImages: [],
       modalImageIndex: 0,
-      // Admin Form state
+      // Admin state
+      adminTab: "products", // 'products' | 'branding'
+      adminBrandingDraft: null,
       editingProductId: null,
       adminFormImages: [],
       adminSearch: ""
@@ -876,6 +921,33 @@
 
     function t(key) {
       return (I18N[state.lang] && I18N[state.lang][key]) || key;
+    }
+
+
+    function getSiteName() {
+      return (state.siteSettings && state.siteSettings.siteName) || "Magnet Group";
+    }
+
+
+    function getSiteLogo() {
+      return (state.siteSettings && state.siteSettings.siteLogo) || "";
+    }
+
+
+    function getCategoryConfig(catId) {
+      const base = CATEGORIES.find(c => c.id === catId) || CATEGORIES[0];
+      const custom = (state.siteSettings && state.siteSettings.categories && state.siteSettings.categories[base.id]) || {};
+      return {
+        ...base,
+        name: (custom.name && custom.name.trim()) ? custom.name.trim() : base.name,
+        coverImage: custom.coverImage || "",
+        logoImage: custom.logoImage || ""
+      };
+    }
+
+
+    function getAllCategories() {
+      return CATEGORIES.map(c => getCategoryConfig(c.id));
     }
 
 
@@ -930,10 +1002,185 @@
     }
 
 
+    function renderDefaultSiteEmblem(size = "sm") {
+      const siteName = getSiteName();
+      const firstChar = escapeHtml((siteName || "M").trim().charAt(0).toUpperCase() || "M");
+      if (size === "lg") {
+        return `
+          <span class="font-luxury text-4xl font-bold text-[#E3C265] leading-none">${firstChar}</span>
+          <span class="text-[8px] tracking-[0.18em] text-[#E3C265] font-bold mt-1.5 px-1 truncate max-w-full">${escapeHtml(siteName.slice(0, 10).toUpperCase())}</span>
+        `;
+      }
+      return `
+        <span class="font-luxury text-[#E3C265] text-lg font-bold leading-none">${firstChar}</span>
+        <span class="text-[6px] tracking-widest text-[#E3C265] font-semibold mt-0.5 px-0.5 truncate max-w-full">${escapeHtml(siteName.slice(0, 7).toUpperCase())}</span>
+      `;
+    }
+
+
+    function renderCategoryLogoInner(cat, textSizeClass = "text-xl") {
+      if (cat.logoImage) {
+        return `<img src="${escapeHtml(cat.logoImage)}" alt="${escapeHtml(cat.name)}" class="w-full h-full object-contain" />`;
+      }
+      const firstChar = escapeHtml((cat.name || "M").trim().charAt(0).toUpperCase() || "M");
+      return `<span class="font-luxury text-[#E3C265] ${textSizeClass} font-bold">${firstChar}</span>`;
+    }
+
+
+    function syncBrandChrome() {
+      const siteName = getSiteName();
+      const siteLogo = getSiteLogo();
+
+
+      document.title = `${siteName} | سيارات فاخرة • عقارات • أثاث وأجهزة منزلية`;
+
+
+      const headerNameEl = document.getElementById("header-site-name");
+      if (headerNameEl) headerNameEl.textContent = siteName;
+
+
+      const footerNameEl = document.getElementById("footer-site-name");
+      if (footerNameEl) footerNameEl.textContent = siteName;
+
+
+      const headerLogoEl = document.getElementById("header-site-logo");
+      if (headerLogoEl) {
+        if (siteLogo) {
+          headerLogoEl.innerHTML = `<img src="${escapeHtml(siteLogo)}" alt="${escapeHtml(siteName)}" class="w-full h-full object-contain" />`;
+        } else {
+          headerLogoEl.innerHTML = renderDefaultSiteEmblem("sm");
+        }
+      }
+
+
+      const faviconEl = document.getElementById("dynamic-favicon");
+      if (faviconEl && siteLogo) {
+        faviconEl.href = siteLogo;
+      }
+    }
+
+
     // =========================================================================
-    // 4. محرك Firebase + التخزين المحلي
+    // 4. محرك Firebase + التخزين المحلي (للمنتجات وإعدادات الموقع والأقسام)
     // =========================================================================
+    function loadLocalSiteSettings() {
+      try {
+        const saved = localStorage.getItem(SETTINGS_STORAGE_KEY);
+        if (saved) {
+          state.siteSettings = normalizeSiteSettings(JSON.parse(saved));
+          return;
+        }
+      } catch (e) {}
+      state.siteSettings = createDefaultSiteSettings();
+    }
+
+
+    function saveLocalSiteSettings(settingsObj) {
+      try {
+        localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(settingsObj));
+      } catch (e) {
+        // Ignore quota warnings when Firebase is primary
+      }
+    }
+
+
+    async function loadFirestoreSiteSettings() {
+      if (!isFirebaseConfigured || !state.fb) return;
+      try {
+        const { db, fsMod } = state.fb;
+        const [metaSnap, imgsSnap] = await Promise.all([
+          fsMod.getDoc(fsMod.doc(db, "products", SITE_SETTINGS_DOC_ID)),
+          fsMod.getDocs(fsMod.collection(db, "products", SITE_SETTINGS_DOC_ID, "images"))
+        ]);
+
+
+        if (!metaSnap.exists() && imgsSnap.empty) return;
+
+
+        const base = metaSnap.exists() ? metaSnap.data() : {};
+        const merged = normalizeSiteSettings(base);
+
+
+        imgsSnap.forEach(d => {
+          const key = d.id;
+          const val = (d.data() && d.data().data) || "";
+          if (!val) return;
+          if (key === "siteLogo") {
+            merged.siteLogo = val;
+          } else {
+            const match = key.match(/^cat_([a-z]+)_(cover|logo)$/);
+            if (match && merged.categories[match[1]]) {
+              if (match[2] === "cover") merged.categories[match[1]].coverImage = val;
+              if (match[2] === "logo") merged.categories[match[1]].logoImage = val;
+            }
+          }
+        });
+
+
+        state.siteSettings = merged;
+        saveLocalSiteSettings(merged);
+      } catch (err) {
+        console.warn("Could not load site settings from Firestore:", err);
+      }
+    }
+
+
+    async function saveSiteSettingsToBackend(rawSettings) {
+      const normalized = normalizeSiteSettings(rawSettings);
+
+
+      if (!isFirebaseConfigured || !state.fb) {
+        state.siteSettings = normalized;
+        saveLocalSiteSettings(normalized);
+        return;
+      }
+
+
+      const { db, fsMod } = state.fb;
+      const metaPayload = {
+        isSiteSettings: true,
+        siteName: normalized.siteName,
+        categories: {},
+        updatedAt: Date.now()
+      };
+      CATEGORIES.forEach(c => {
+        metaPayload.categories[c.id] = { name: normalized.categories[c.id].name };
+      });
+
+
+      await fsMod.setDoc(fsMod.doc(db, "products", SITE_SETTINGS_DOC_ID), metaPayload);
+
+
+      const imageEntries = [
+        ["siteLogo", normalized.siteLogo],
+        ...CATEGORIES.flatMap(c => [
+          [`cat_${c.id}_cover`, normalized.categories[c.id].coverImage],
+          [`cat_${c.id}_logo`, normalized.categories[c.id].logoImage]
+        ])
+      ];
+
+
+      for (const [key, data] of imageEntries) {
+        const ref = fsMod.doc(db, "products", SITE_SETTINGS_DOC_ID, "images", key);
+        if (data && data.trim()) {
+          await fsMod.setDoc(ref, { key, data: data.trim(), updatedAt: Date.now() });
+        } else {
+          await fsMod.deleteDoc(ref).catch(() => {});
+        }
+      }
+
+
+      state.siteSettings = normalized;
+      saveLocalSiteSettings(normalized);
+    }
+
+
     async function initFirebaseAndData() {
+      // Apply cached branding immediately for smooth paint
+      loadLocalSiteSettings();
+      syncBrandChrome();
+
+
       if (!isFirebaseConfigured) {
         loadLocalProducts();
         pickRandomSelection();
@@ -963,13 +1210,17 @@
         });
 
 
-        await loadFirestoreProducts();
+        await Promise.all([
+          loadFirestoreProducts(),
+          loadFirestoreSiteSettings()
+        ]);
       } catch (err) {
         console.error("Firebase init failed, using local fallback:", err);
         loadLocalProducts();
       }
 
 
+      syncBrandChrome();
       pickRandomSelection();
       handleHashRoute();
     }
@@ -1002,20 +1253,23 @@
     async function loadFirestoreProducts() {
       const { db, fsMod } = state.fb;
       const snap = await fsMod.getDocs(fsMod.collection(db, "products"));
-      if (snap.empty) {
+      const list = [];
+      snap.forEach(d => {
+        const data = d.data();
+        if (d.id === SITE_SETTINGS_DOC_ID || data.isSiteSettings) return;
+        list.push({
+          id: d.id,
+          ...data,
+          images: data.coverImage ? [data.coverImage] : (data.images || [])
+        });
+      });
+
+
+      if (list.length === 0) {
         state.products = structuredClone(INITIAL_PRODUCTS);
         state.firestoreEmpty = true;
       } else {
         state.firestoreEmpty = false;
-        const list = [];
-        snap.forEach(d => {
-          const data = d.data();
-          list.push({
-            id: d.id,
-            ...data,
-            images: data.coverImage ? [data.coverImage] : (data.images || [])
-          });
-        });
         list.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
         state.products = list;
       }
@@ -1026,7 +1280,7 @@
       if (!isFirebaseConfigured || !state.fb || state.firestoreEmpty) {
         return product.images && product.images.length
           ? product.images
-          : [makeLuxuryPlaceholder(product.category, product.title)];
+          : [makeLuxuryPlaceholder(getCategoryConfig(product.category).name, product.title)];
       }
       try {
         const { db, fsMod } = state.fb;
@@ -1043,14 +1297,15 @@
       }
       return product.images && product.images.length
         ? product.images
-        : [makeLuxuryPlaceholder(product.category, product.title)];
+        : [makeLuxuryPlaceholder(getCategoryConfig(product.category).name, product.title)];
     }
 
 
     async function saveProductToBackend(productObj, imagesArray) {
+      const catName = getCategoryConfig(productObj.category).name;
       const finalImages = imagesArray.length > 0
         ? imagesArray.slice(0, MAX_IMAGES_PER_PRODUCT)
-        : [makeLuxuryPlaceholder(productObj.category, productObj.title)];
+        : [makeLuxuryPlaceholder(catName, productObj.title)];
 
 
       if (!isFirebaseConfigured || !state.fb) {
@@ -1201,7 +1456,8 @@
 
 
     function renderProductCard(p) {
-      const thumb = (p.images && p.images[0]) || makeLuxuryPlaceholder(p.category, p.title);
+      const catName = getCategoryConfig(p.category).name;
+      const thumb = (p.images && p.images[0]) || makeLuxuryPlaceholder(catName, p.title);
       const excerpt = stripMarkdown(p.description).slice(0, 95);
       return `
         <article onclick="openProductModal('${p.id}')" class="bg-white rounded-3xl border border-gray-100 card-shadow overflow-hidden cursor-pointer flex items-stretch min-h-[155px] sm:min-h-[170px]">
@@ -1234,27 +1490,45 @@
 
 
     function renderHomeView() {
-      const catCardsHtml = CATEGORIES.map(cat => {
+      const siteName = getSiteName();
+      const siteLogo = getSiteLogo();
+      const allCategories = getAllCategories();
+
+
+      const catCardsHtml = allCategories.map(cat => {
         const count = state.products.filter(p => p.category === cat.id).length;
         const tags = state.lang === "ar" ? cat.tagsAr : cat.tagsEn;
+        const hasCover = Boolean(cat.coverImage);
+
+
         return `
-          <div onclick="openCategory('${cat.id}')" class="relative rounded-3xl overflow-hidden cursor-pointer card-shadow bg-gradient-to-br from-[#1C2434] via-[#111827] to-[#0B132B] text-white p-5 sm:p-6 border border-[#C8A236]/25">
-            <div class="flex items-start justify-between gap-3 mb-4">
-              <div>
-                <span class="inline-block text-xs font-bold text-[#E3C265] bg-[#E3C265]/15 px-3 py-1 rounded-full mb-2">${count} ${t("items_count")}</span>
-                <h3 class="font-luxury text-2xl font-bold tracking-wide">${cat.name}</h3>
-                <p class="text-xs text-gray-300 mt-1">${state.lang === "ar" ? cat.arSubtitle : cat.enSubtitle}</p>
+          <div onclick="openCategory('${cat.id}')" class="group relative rounded-3xl overflow-hidden cursor-pointer card-shadow bg-gradient-to-br from-[#1C2434] via-[#111827] to-[#0B132B] text-white p-5 sm:p-6 border border-[#C8A236]/25 min-h-[215px] flex flex-col justify-between">
+            ${hasCover ? `
+              <img src="${escapeHtml(cat.coverImage)}" alt="${escapeHtml(cat.name)}" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0B132B]/95 via-[#0B132B]/70 to-[#0B132B]/40"></div>
+            ` : ""}
+
+
+            <div class="relative z-10 flex items-start justify-between gap-3 mb-4">
+              <div class="min-w-0">
+                <span class="inline-block text-xs font-bold text-[#E3C265] bg-[#0B132B]/70 backdrop-blur-sm border border-[#E3C265]/30 px-3 py-1 rounded-full mb-2">${count} ${t("items_count")}</span>
+                <h3 class="font-luxury text-2xl font-bold tracking-wide drop-shadow-sm">${escapeHtml(cat.name)}</h3>
+                <p class="text-xs text-gray-200 mt-1">${state.lang === "ar" ? cat.arSubtitle : cat.enSubtitle}</p>
               </div>
-              <div class="w-12 h-12 rounded-2xl bg-[#0B132B] border border-[#E3C265]/40 flex items-center justify-center shrink-0">
-                <span class="font-luxury text-[#E3C265] text-xl font-bold">M</span>
+              <div class="w-12 h-12 rounded-2xl bg-[#0B132B]/90 backdrop-blur-sm border border-[#E3C265]/40 flex items-center justify-center shrink-0 overflow-hidden shadow-md">
+                ${renderCategoryLogoInner(cat, "text-xl")}
               </div>
             </div>
-            <div class="flex flex-wrap gap-2 mb-4">
-              ${tags.map(tg => `<span class="text-[11px] bg-white/10 text-gray-100 px-3 py-1 rounded-full">${tg}</span>`).join("")}
-            </div>
-            <div class="flex items-center justify-end text-xs font-bold text-[#E3C265] gap-1">
-              <span>${t("view_more")}</span>
-              <span>${state.lang === "ar" ? "←" : "→"}</span>
+
+
+            <div class="relative z-10">
+              <div class="flex flex-wrap gap-2 mb-4">
+                ${tags.map(tg => `<span class="text-[11px] bg-white/15 backdrop-blur-sm text-gray-100 px-3 py-1 rounded-full">${tg}</span>`).join("")}
+              </div>
+              <div class="flex items-center justify-end text-xs font-bold text-[#E3C265] gap-1">
+                <span>${t("view_more")}</span>
+                <span>${state.lang === "ar" ? "←" : "→"}</span>
+              </div>
             </div>
           </div>
         `;
@@ -1262,23 +1536,23 @@
 
 
       // 3 products per category with clickable Header AND "View More" button directly BELOW the 3 products
-      const categorySectionsHtml = CATEGORIES.map(cat => {
+      const categorySectionsHtml = allCategories.map(cat => {
         const items = state.products.filter(p => p.category === cat.id);
         const topThree = items.slice(0, 3);
         return `
           <section class="mt-12">
             <!-- Clickable Category Header -->
             <div onclick="openCategory('${cat.id}')" class="flex items-center justify-between gap-3 mb-5 cursor-pointer group">
-              <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-2xl bg-[#0B132B] border border-[#C8A236]/50 flex items-center justify-center shadow-sm group-hover:scale-105 transition">
-                  <span class="font-luxury text-[#E3C265] font-bold text-lg">M</span>
+              <div class="flex items-center gap-3 min-w-0">
+                <div class="w-12 h-12 rounded-2xl bg-[#0B132B] border border-[#C8A236]/50 flex items-center justify-center shadow-sm group-hover:scale-105 transition overflow-hidden shrink-0">
+                  ${renderCategoryLogoInner(cat, "text-lg")}
                 </div>
-                <div>
-                  <h2 class="font-luxury text-2xl font-bold text-[#0B132B] group-hover:text-[#A67E19] transition">${cat.name}</h2>
+                <div class="min-w-0">
+                  <h2 class="font-luxury text-2xl font-bold text-[#0B132B] group-hover:text-[#A67E19] transition truncate">${escapeHtml(cat.name)}</h2>
                   <p class="text-xs text-gray-500 font-semibold">${items.length} ${t("items_count")}</p>
                 </div>
               </div>
-              <span class="text-xs font-bold text-[#A67E19] group-hover:underline">${t("view_more")} ${state.lang === "ar" ? "←" : "→"}</span>
+              <span class="text-xs font-bold text-[#A67E19] group-hover:underline shrink-0">${t("view_more")} ${state.lang === "ar" ? "←" : "→"}</span>
             </div>
 
 
@@ -1291,7 +1565,7 @@
             <!-- View More Button DIRECTLY BELOW the 3 products -->
             <div class="mt-5 flex justify-center">
               <button onclick="openCategory('${cat.id}')" class="px-8 py-2.5 rounded-full bg-white border border-[#C8A236]/60 text-[#0B132B] font-bold text-sm hover:bg-amber-50 hover:border-[#C8A236] shadow-sm transition flex items-center gap-2">
-                <span>${t("view_more")} — ${cat.name}</span>
+                <span>${t("view_more")} — ${escapeHtml(cat.name)}</span>
                 <span>${state.lang === "ar" ? "←" : "→"}</span>
               </button>
             </div>
@@ -1300,7 +1574,7 @@
       }).join("");
 
 
-      // Random 10 products section (unchanged)
+      // Random 10 products section
       const randomProducts = state.randomIds
         .map(id => state.products.find(p => p.id === id))
         .filter(Boolean);
@@ -1308,12 +1582,12 @@
 
 
       return `
-        <!-- HERO SECTION (Clean Minimalist — NO "اسحب للاستكشاف") -->
+        <!-- HERO SECTION -->
         <section class="pt-8 pb-6 text-center">
-          <div class="w-24 h-24 mx-auto bg-[#0B132B] rounded-2xl shadow-lg border border-[#C8A236]/50 flex flex-col items-center justify-center mb-6">
-            <span class="font-luxury text-4xl font-bold text-[#E3C265] leading-none">M</span>
-            <span class="text-[9px] tracking-[0.22em] text-[#E3C265] font-bold mt-1.5">MAGNET</span>
-            <span class="text-[7px] tracking-[0.2em] text-gray-300">GROUP</span>
+          <div class="w-24 h-24 mx-auto bg-[#0B132B] rounded-2xl shadow-lg border border-[#C8A236]/50 flex flex-col items-center justify-center mb-6 overflow-hidden">
+            ${siteLogo
+              ? `<img src="${escapeHtml(siteLogo)}" alt="${escapeHtml(siteName)}" class="w-full h-full object-contain" />`
+              : renderDefaultSiteEmblem("lg")}
           </div>
 
 
@@ -1323,7 +1597,7 @@
           </a>
 
 
-          <h1 class="font-luxury text-4xl sm:text-5xl font-bold gold-text mb-4">Magnet Group</h1>
+          <h1 class="font-luxury text-4xl sm:text-5xl font-bold gold-text mb-4">${escapeHtml(siteName)}</h1>
           <p class="text-gray-600 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">${t("hero_subtitle")}</p>
         </section>
 
@@ -1359,7 +1633,7 @@
 
 
     function renderCategoryView() {
-      const cat = CATEGORIES.find(c => c.id === state.activeCategoryId) || CATEGORIES[0];
+      const cat = getCategoryConfig(state.activeCategoryId || CATEGORIES[0].id);
       const allInCat = state.products.filter(p => p.category === cat.id);
       const subs = [...new Set(allInCat.map(p => p.subcategory).filter(Boolean))];
 
@@ -1374,13 +1648,13 @@
 
       return `
         <section class="pt-6">
-          <div class="flex items-center justify-between mb-6">
-            <div>
-              <h1 class="font-luxury text-3xl font-bold text-[#0B132B]">${cat.name}</h1>
+          <div class="flex items-center justify-between gap-4 mb-6">
+            <div class="min-w-0">
+              <h1 class="font-luxury text-3xl font-bold text-[#0B132B] truncate">${escapeHtml(cat.name)}</h1>
               <p class="text-xs text-gray-500 mt-1 font-semibold">${allInCat.length} ${t("items_count")}</p>
             </div>
-            <div class="w-14 h-14 rounded-2xl bg-[#0B132B] border border-[#C8A236]/50 flex items-center justify-center">
-              <span class="font-luxury text-[#E3C265] text-2xl font-bold">M</span>
+            <div class="w-16 h-16 rounded-2xl bg-[#0B132B] border border-[#C8A236]/50 flex items-center justify-center overflow-hidden shadow-md shrink-0">
+              ${renderCategoryLogoInner(cat, "text-2xl")}
             </div>
           </div>
 
@@ -1463,6 +1737,7 @@
       } else {
         state.localAdminUnlocked = false;
       }
+      state.adminBrandingDraft = null;
       render();
     };
 
@@ -1477,6 +1752,365 @@
         showToast("هذا البريد الإلكتروني لا يملك الموقع!");
       }
     };
+
+
+    function ensureBrandingDraft() {
+      if (!state.adminBrandingDraft) {
+        state.adminBrandingDraft = structuredClone(state.siteSettings);
+      }
+      return state.adminBrandingDraft;
+    }
+
+
+    window.switchAdminTab = function (tab) {
+      state.adminTab = tab;
+      if (tab === "branding") {
+        state.adminBrandingDraft = structuredClone(state.siteSettings);
+      }
+      render();
+    };
+
+
+    window.updateDraftSiteName = function (val) {
+      const draft = ensureBrandingDraft();
+      draft.siteName = val;
+    };
+
+
+    window.updateDraftCatName = function (catId, val) {
+      const draft = ensureBrandingDraft();
+      if (draft.categories[catId]) {
+        draft.categories[catId].name = val;
+      }
+    };
+
+
+    function compressBrandingImage(file, type = "logo") {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            const maxWidth = type === "cover" ? 1100 : 480;
+            let w = img.width;
+            let h = img.height;
+            if (w > maxWidth) {
+              h = Math.round((h * maxWidth) / w);
+              w = maxWidth;
+            }
+            const canvas = document.createElement("canvas");
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, w, h);
+
+
+            if (type === "logo") {
+              // Preserve transparent background for logos using WebP (or PNG fallback)
+              const webpUrl = canvas.toDataURL("image/webp", 0.85);
+              if (webpUrl.startsWith("data:image/webp")) {
+                resolve(webpUrl);
+              } else {
+                resolve(canvas.toDataURL("image/png"));
+              }
+            } else {
+              resolve(canvas.toDataURL("image/jpeg", 0.80));
+            }
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+
+    window.handleBrandingFileUpload = async function (event, targetType, catId = null) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const draft = ensureBrandingDraft();
+
+
+      try {
+        showToast("جاري تجهيز الصورة...");
+        const imgType = targetType === "catCover" ? "cover" : "logo";
+        const dataUrl = await compressBrandingImage(file, imgType);
+
+
+        if (targetType === "siteLogo") {
+          draft.siteLogo = dataUrl;
+        } else if (targetType === "catCover" && catId && draft.categories[catId]) {
+          draft.categories[catId].coverImage = dataUrl;
+        } else if (targetType === "catLogo" && catId && draft.categories[catId]) {
+          draft.categories[catId].logoImage = dataUrl;
+        }
+
+
+        event.target.value = "";
+        showToast("تم تجهيز الصورة — اضغط (حفظ إعدادات الموقع والأقسام) لتثبيتها.");
+        render();
+      } catch (err) {
+        console.error(err);
+        showToast("تعذر قراءة الصورة، جرّب صورة أخرى.");
+      }
+    };
+
+
+    window.applyBrandingImageUrl = function (inputId, targetType, catId = null) {
+      const inp = document.getElementById(inputId);
+      const url = (inp ? inp.value : "").trim();
+      if (!url) return;
+      const draft = ensureBrandingDraft();
+
+
+      if (targetType === "siteLogo") {
+        draft.siteLogo = url;
+      } else if (targetType === "catCover" && catId && draft.categories[catId]) {
+        draft.categories[catId].coverImage = url;
+      } else if (targetType === "catLogo" && catId && draft.categories[catId]) {
+        draft.categories[catId].logoImage = url;
+      }
+      render();
+    };
+
+
+    window.clearBrandingImage = function (targetType, catId = null) {
+      const draft = ensureBrandingDraft();
+      if (targetType === "siteLogo") {
+        draft.siteLogo = "";
+      } else if (targetType === "catCover" && catId && draft.categories[catId]) {
+        draft.categories[catId].coverImage = "";
+      } else if (targetType === "catLogo" && catId && draft.categories[catId]) {
+        draft.categories[catId].logoImage = "";
+      }
+      render();
+    };
+
+
+    window.saveBrandingForm = async function (event) {
+      event.preventDefault();
+      const btn = document.getElementById("branding-save-btn");
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "جاري حفظ الإعدادات...";
+      }
+
+
+      const draft = ensureBrandingDraft();
+      try {
+        await saveSiteSettingsToBackend(draft);
+        state.adminBrandingDraft = structuredClone(state.siteSettings);
+        syncBrandChrome();
+        showToast("تم حفظ إعدادات الموقع والأقسام بنجاح ✅");
+        render();
+      } catch (err) {
+        console.error(err);
+        showToast("تعذر الحفظ في Firebase. تأكد من اتصالك وصلاحيات Firestore Rules.");
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = "حفظ إعدادات الموقع والأقسام";
+        }
+      }
+    };
+
+
+    window.resetBrandingToDefault = async function () {
+      if (!confirm("هل تريد استعادة الاسم والشعار والصور الافتراضية للموقع والأقسام؟")) return;
+      try {
+        await saveSiteSettingsToBackend(createDefaultSiteSettings());
+        state.adminBrandingDraft = structuredClone(state.siteSettings);
+        syncBrandChrome();
+        showToast("تمت استعادة الإعدادات الافتراضية ✅");
+        render();
+      } catch (err) {
+        console.error(err);
+        showToast("تعذر استعادة الإعدادات.");
+      }
+    };
+
+
+    function renderAdminBrandingTab() {
+      const draft = ensureBrandingDraft();
+
+
+      const catEditorsHtml = CATEGORIES.map(baseCat => {
+        const cDraft = draft.categories[baseCat.id] || { name: baseCat.name, coverImage: "", logoImage: "" };
+        return `
+          <div class="bg-gray-50/90 rounded-2xl p-4 sm:p-5 border border-gray-200/80 space-y-4">
+            <div class="flex items-center justify-between gap-2 border-b border-gray-200/70 pb-3">
+              <div>
+                <span class="text-[11px] font-bold text-[#A67E19]">${baseCat.adminLabel}</span>
+                <h3 class="font-luxury text-base font-bold text-[#0B132B]">${escapeHtml(cDraft.name || baseCat.name)}</h3>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-[#0B132B] border border-[#C8A236]/40 flex items-center justify-center overflow-hidden shrink-0">
+                ${cDraft.logoImage
+                  ? `<img src="${escapeHtml(cDraft.logoImage)}" class="w-full h-full object-contain" />`
+                  : `<span class="font-luxury text-[#E3C265] font-bold">${escapeHtml((cDraft.name || baseCat.name).charAt(0).toUpperCase())}</span>`}
+              </div>
+            </div>
+
+
+            <!-- Single Field Category Name -->
+            <div>
+              <label class="block text-xs font-bold text-gray-600 mb-1.5">اسم القسم (عربي أو إنجليزي في خانة واحدة)</label>
+              <input
+                type="text"
+                required
+                value="${escapeHtml(cDraft.name)}"
+                oninput="updateDraftCatName('${baseCat.id}', this.value)"
+                placeholder="${escapeHtml(baseCat.name)}"
+                class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:border-[#C8A236]"
+              />
+            </div>
+
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- External Cover Image -->
+              <div class="bg-white rounded-2xl p-3.5 border border-gray-200/80 space-y-3">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-xs font-extrabold text-[#0B132B]">الصورة الخارجية للقسم</span>
+                  ${cDraft.coverImage ? `<button type="button" onclick="clearBrandingImage('catCover', '${baseCat.id}')" class="text-[11px] font-bold text-red-500 hover:underline">إزالة</button>` : ""}
+                </div>
+                <p class="text-[11px] text-gray-400">تظهر كخلفية على بطاقة القسم في الصفحة الرئيسية.</p>
+
+
+                <div class="relative h-28 rounded-xl overflow-hidden bg-gradient-to-br from-[#1C2434] to-[#0B132B] border border-gray-200 flex items-center justify-center">
+                  ${cDraft.coverImage
+                    ? `<img src="${escapeHtml(cDraft.coverImage)}" class="w-full h-full object-cover" />`
+                    : `<span class="text-[11px] text-gray-300 font-semibold">الخلفية الكحلية الافتراضية</span>`}
+                </div>
+
+
+                <label class="block text-center cursor-pointer w-full py-2 rounded-xl gold-gradient text-[#0B132B] text-xs font-extrabold shadow-sm">
+                  + رفع صورة خارجية من جهازك
+                  <input type="file" accept="image/*" onchange="handleBrandingFileUpload(event, 'catCover', '${baseCat.id}')" class="hidden" />
+                </label>
+
+
+                <div class="flex gap-1.5">
+                  <input id="url-cover-${baseCat.id}" type="url" placeholder="أو الصق رابط صورة مباشر" class="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-3 py-1.5 text-[11px] focus:outline-none focus:border-[#C8A236]" />
+                  <button type="button" onclick="applyBrandingImageUrl('url-cover-${baseCat.id}', 'catCover', '${baseCat.id}')" class="px-3 py-1.5 rounded-xl bg-[#0B132B] text-white text-[11px] font-bold shrink-0">تطبيق</button>
+                </div>
+              </div>
+
+
+              <!-- Internal Logo Image -->
+              <div class="bg-white rounded-2xl p-3.5 border border-gray-200/80 space-y-3">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-xs font-extrabold text-[#0B132B]">اللوجو الداخلي للقسم</span>
+                  ${cDraft.logoImage ? `<button type="button" onclick="clearBrandingImage('catLogo', '${baseCat.id}')" class="text-[11px] font-bold text-red-500 hover:underline">إزالة</button>` : ""}
+                </div>
+                <p class="text-[11px] text-gray-400">يظهر عند الضغط على القسم لرؤية المنتجات وبجانب عنوانه.</p>
+
+
+                <div class="h-28 rounded-xl bg-gray-50 border border-dashed border-gray-200 flex items-center justify-center">
+                  <div class="w-20 h-20 rounded-2xl bg-[#0B132B] border border-[#C8A236]/50 flex items-center justify-center overflow-hidden shadow-sm">
+                    ${cDraft.logoImage
+                      ? `<img src="${escapeHtml(cDraft.logoImage)}" class="w-full h-full object-contain" />`
+                      : `<span class="font-luxury text-[#E3C265] text-2xl font-bold">${escapeHtml((cDraft.name || baseCat.name).charAt(0).toUpperCase())}</span>`}
+                  </div>
+                </div>
+
+
+                <label class="block text-center cursor-pointer w-full py-2 rounded-xl gold-gradient text-[#0B132B] text-xs font-extrabold shadow-sm">
+                  + رفع لوجو داخلي من جهازك
+                  <input type="file" accept="image/*" onchange="handleBrandingFileUpload(event, 'catLogo', '${baseCat.id}')" class="hidden" />
+                </label>
+
+
+                <div class="flex gap-1.5">
+                  <input id="url-logo-${baseCat.id}" type="url" placeholder="أو الصق رابط لوجو مباشر" class="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-3 py-1.5 text-[11px] focus:outline-none focus:border-[#C8A236]" />
+                  <button type="button" onclick="applyBrandingImageUrl('url-logo-${baseCat.id}', 'catLogo', '${baseCat.id}')" class="px-3 py-1.5 rounded-xl bg-[#0B132B] text-white text-[11px] font-bold shrink-0">تطبيق</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+
+      return `
+        <form onsubmit="saveBrandingForm(event)" class="space-y-6">
+          <!-- SITE IDENTITY CARD -->
+          <div class="bg-white rounded-3xl p-5 sm:p-7 border border-gray-100 card-shadow space-y-5">
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <h2 class="text-lg font-extrabold text-[#0B132B]">اسم الموقع واللوجو الرئيسي</h2>
+                <p class="text-xs text-gray-500 mt-0.5">يظهران في الشريط العلوي، الواجهة الرئيسية، وأسفل الموقع.</p>
+              </div>
+              <button type="button" onclick="resetBrandingToDefault()" class="text-xs font-bold text-gray-400 hover:text-red-500 transition">استعادة الافتراضي</button>
+            </div>
+
+
+            <!-- Single Field Site Name -->
+            <div>
+              <label class="block text-xs font-bold text-gray-600 mb-1.5">اسم الموقع (عربي أو إنجليزي في خانة واحدة)</label>
+              <input
+                type="text"
+                required
+                value="${escapeHtml(draft.siteName)}"
+                oninput="updateDraftSiteName(this.value)"
+                placeholder="مثال: Magnet Group"
+                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-bold focus:outline-none focus:border-[#C8A236]"
+              />
+            </div>
+
+
+            <!-- Site Logo Uploader -->
+            <div class="bg-gray-50 rounded-2xl p-4 border border-dashed border-[#C8A236]/60 space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-sm font-extrabold text-[#0B132B]">لوجو الموقع</span>
+                ${draft.siteLogo ? `<button type="button" onclick="clearBrandingImage('siteLogo')" class="text-xs font-bold text-red-500 hover:underline">حذف اللوجو</button>` : ""}
+              </div>
+
+
+              <div class="flex flex-col sm:flex-row items-center gap-4">
+                <div class="w-24 h-24 rounded-2xl bg-[#0B132B] border border-[#C8A236]/50 flex flex-col items-center justify-center overflow-hidden shadow-md shrink-0">
+                  ${draft.siteLogo
+                    ? `<img src="${escapeHtml(draft.siteLogo)}" alt="Site Logo" class="w-full h-full object-contain" />`
+                    : `<span class="font-luxury text-3xl font-bold text-[#E3C265]">${escapeHtml((draft.siteName || "M").charAt(0).toUpperCase())}</span>`}
+                </div>
+
+
+                <div class="flex-1 w-full space-y-2.5">
+                  <label class="inline-flex items-center justify-center w-full sm:w-auto cursor-pointer px-5 py-2.5 rounded-xl gold-gradient text-[#0B132B] text-xs font-extrabold shadow-sm">
+                    + اختر لوجو الموقع من جهازك
+                    <input type="file" accept="image/*" onchange="handleBrandingFileUpload(event, 'siteLogo')" class="hidden" />
+                  </label>
+
+
+                  <div class="flex gap-2">
+                    <input id="url-site-logo" type="url" placeholder="أو الصق رابط اللوجو المباشر (https://...)" class="flex-1 bg-white border border-gray-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-[#C8A236]" />
+                    <button type="button" onclick="applyBrandingImageUrl('url-site-logo', 'siteLogo')" class="px-3.5 py-2 rounded-xl bg-[#0B132B] text-white text-xs font-bold shrink-0">تطبيق</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- CATEGORIES SETTINGS CARD -->
+          <div class="bg-white rounded-3xl p-5 sm:p-7 border border-gray-100 card-shadow space-y-5">
+            <div>
+              <h2 class="text-lg font-extrabold text-[#0B132B]">أسماء وصور الأقسام</h2>
+              <p class="text-xs text-gray-500 mt-0.5">عدّل اسم كل قسم، وصورته الخارجية في الرئيسية، واللوجو الداخلي عند فتحه.</p>
+            </div>
+
+
+            <div class="space-y-4">
+              ${catEditorsHtml}
+            </div>
+          </div>
+
+
+          <!-- SAVE ALL BRANDING SETTINGS BUTTON -->
+          <button id="branding-save-btn" type="submit" class="w-full gold-gradient text-[#0B132B] font-extrabold py-4 rounded-2xl shadow-lg text-base transition">
+            حفظ إعدادات الموقع والأقسام
+          </button>
+        </form>
+      `;
+    }
 
 
     function renderAdminView() {
@@ -1544,6 +2178,7 @@
 
 
       // Case D: AUTHORIZED OWNER DASHBOARD
+      const allCategories = getAllCategories();
       const editingItem = state.editingProductId
         ? state.products.find(p => p.id === state.editingProductId)
         : null;
@@ -1551,7 +2186,8 @@
 
       const filteredAdminProducts = state.products.filter(p => {
         const q = state.adminSearch.trim().toLowerCase();
-        return !q || p.title.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
+        const catName = getCategoryConfig(p.category).name.toLowerCase();
+        return !q || p.title.toLowerCase().includes(q) || p.category.toLowerCase().includes(q) || catName.includes(q);
       });
 
 
@@ -1560,8 +2196,10 @@
           <!-- Admin Top Header -->
           <div class="bg-[#0B132B] text-white rounded-3xl p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4">
             <div>
-              <span class="text-xs text-[#E3C265] font-bold">لوحة تحكم المالك • Magnet Group</span>
-              <h1 class="text-xl sm:text-2xl font-extrabold mt-1">إدارة المنتجات والصور</h1>
+              <span class="text-xs text-[#E3C265] font-bold">لوحة تحكم المالك • ${escapeHtml(getSiteName())}</span>
+              <h1 class="text-xl sm:text-2xl font-extrabold mt-1">
+                ${state.adminTab === "branding" ? "إعدادات الموقع والأقسام" : "إدارة المنتجات والصور"}
+              </h1>
               <p class="text-xs text-gray-300 mt-1 font-mono">${OWNER_EMAIL} ${isFirebaseConfigured ? "(متصل بـ Firebase ✅)" : "(وضع تجريبي محلي ⚠️)"}</p>
             </div>
             <div class="flex items-center gap-2">
@@ -1575,129 +2213,145 @@
           </div>
 
 
-          <!-- ADD / EDIT PRODUCT FORM (Single Title + Single Description + Up to 15 Images) -->
-          <div class="bg-white rounded-3xl p-5 sm:p-7 border border-gray-100 card-shadow">
-            <div class="flex items-center justify-between mb-5">
-              <h2 class="text-lg font-extrabold text-[#0B132B]">
-                ${editingItem ? "تعديل المنتج" : "إضافة منتج جديد"}
-              </h2>
-              ${editingItem ? `<button onclick="cancelEditProduct()" class="text-xs font-bold text-red-500 hover:underline">إلغاء التعديل</button>` : ""}
-            </div>
+          <!-- ADMIN TABS SWITCHER -->
+          <div class="grid grid-cols-2 gap-2.5 bg-white p-1.5 rounded-2xl border border-gray-200/80 shadow-sm">
+            <button onclick="switchAdminTab('products')" class="py-3 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition ${state.adminTab === 'products' ? 'gold-gradient text-[#0B132B] shadow-sm' : 'text-gray-600 hover:bg-gray-50'}">
+              📦 إدارة المنتجات
+            </button>
+            <button onclick="switchAdminTab('branding')" class="py-3 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition ${state.adminTab === 'branding' ? 'gold-gradient text-[#0B132B] shadow-sm' : 'text-gray-600 hover:bg-gray-50'}">
+              🎨 إعدادات الموقع والأقسام
+            </button>
+          </div>
 
 
-            <form id="admin-product-form" onsubmit="submitProductForm(event)" class="space-y-4">
-              <!-- Category & Subcategory -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-xs font-bold text-gray-600 mb-1.5">القسم الرئيسي</label>
-                  <select id="f-category" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:border-[#C8A236]">
-                    ${CATEGORIES.map(c => `<option value="${c.id}" ${editingItem && editingItem.category === c.id ? "selected" : ""}>${c.name}</option>`).join("")}
-                  </select>
-                </div>
-                <div>
-                  <label class="block text-xs font-bold text-gray-600 mb-1.5">التصنيف الفرعي (مثال: دفع رباعي / فيلا / أجهزة منزلية)</label>
-                  <input id="f-subcategory" type="text" value="${escapeHtml(editingItem ? editingItem.subcategory : "")}" placeholder="دفع رباعي" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#C8A236]" />
-                </div>
+          ${state.adminTab === "branding" ? renderAdminBrandingTab() : `
+            <!-- ADD / EDIT PRODUCT FORM (Single Title + Single Description + Up to 15 Images) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-7 border border-gray-100 card-shadow">
+              <div class="flex items-center justify-between mb-5">
+                <h2 class="text-lg font-extrabold text-[#0B132B]">
+                  ${editingItem ? "تعديل المنتج" : "إضافة منتج جديد"}
+                </h2>
+                ${editingItem ? `<button onclick="cancelEditProduct()" class="text-xs font-bold text-red-500 hover:underline">إلغاء التعديل</button>` : ""}
               </div>
 
 
-              <!-- SINGLE TITLE FIELD (Arabic or English freely) -->
-              <div>
-                <label class="block text-xs font-bold text-gray-600 mb-1.5">العنوان (عربي أو إنجليزي في خانة واحدة)</label>
-                <input id="f-title" type="text" required value="${escapeHtml(editingItem ? editingItem.title : "")}" placeholder="مثال: Porsche Cayenne Coupe 2024 – Nardo Grey" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:border-[#C8A236]" />
-              </div>
-
-
-              <!-- Price & Currency -->
-              <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                <div class="col-span-1 sm:col-span-2">
-                  <label class="block text-xs font-bold text-gray-600 mb-1.5">السعر (أرقام فقط)</label>
-                  <input id="f-price" type="number" required min="0" step="any" value="${editingItem ? editingItem.price : ""}" placeholder="8000000" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-bold focus:outline-none focus:border-[#C8A236]" />
-                </div>
-                <div>
-                  <label class="block text-xs font-bold text-gray-600 mb-1.5">العملة</label>
-                  <select id="f-currency" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-bold focus:outline-none focus:border-[#C8A236]">
-                    <option value="EGP" ${!editingItem || editingItem.currency === "EGP" ? "selected" : ""}>EGP (جنيه)</option>
-                    <option value="USD" ${editingItem && editingItem.currency === "USD" ? "selected" : ""}>USD (دولار)</option>
-                  </select>
-                </div>
-              </div>
-
-
-              <!-- SINGLE DESCRIPTION FIELD -->
-              <div>
-                <label class="block text-xs font-bold text-gray-600 mb-1.5">الوصف (عربي أو إنجليزي — استخدم • للنقاط و **للعناوين العريضة**)</label>
-                <textarea id="f-description" rows="6" required placeholder="اكتب مواصفات المنتج هنا..." class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm leading-relaxed focus:outline-none focus:border-[#C8A236]">${escapeHtml(editingItem ? editingItem.description : "")}</textarea>
-              </div>
-
-
-              <!-- MULTI IMAGE UPLOADER (UP TO 15 IMAGES) -->
-              <div class="bg-gray-50 rounded-2xl p-4 border border-dashed border-[#C8A236]/60">
-                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <form id="admin-product-form" onsubmit="submitProductForm(event)" class="space-y-4">
+                <!-- Category & Subcategory -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <span class="text-sm font-extrabold text-[#0B132B]">صور المنتج (مسموح حتى 15 صورة)</span>
-                    <span id="admin-img-count" class="mr-2 text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-[#9A7418]">${state.adminFormImages.length} / 15</span>
+                    <label class="block text-xs font-bold text-gray-600 mb-1.5">القسم الرئيسي</label>
+                    <select id="f-category" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:border-[#C8A236]">
+                      ${allCategories.map(c => `<option value="${c.id}" ${editingItem && editingItem.category === c.id ? "selected" : ""}>${escapeHtml(c.name)}</option>`).join("")}
+                    </select>
                   </div>
-                  <label class="cursor-pointer px-4 py-2 rounded-xl gold-gradient text-[#0B132B] text-xs font-extrabold shadow-sm">
-                    + اختر صور من جهازك
-                    <input type="file" accept="image/*" multiple onchange="handleAdminImageFiles(event)" class="hidden" />
-                  </label>
+                  <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-1.5">التصنيف الفرعي (مثال: دفع رباعي / فيلا / أجهزة منزلية)</label>
+                    <input id="f-subcategory" type="text" value="${escapeHtml(editingItem ? editingItem.subcategory : "")}" placeholder="دفع رباعي" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#C8A236]" />
+                  </div>
                 </div>
 
 
-                <!-- Optional Image URL Input -->
-                <div class="flex gap-2 mb-3">
-                  <input id="f-img-url" type="url" placeholder="أو الصق رابط صورة مباشر (https://...)" class="flex-1 bg-white border border-gray-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-[#C8A236]" />
-                  <button type="button" onclick="addAdminImageUrl()" class="px-3 py-2 rounded-xl bg-[#0B132B] text-white text-xs font-bold">إضافة رابط</button>
+                <!-- SINGLE TITLE FIELD (Arabic or English freely) -->
+                <div>
+                  <label class="block text-xs font-bold text-gray-600 mb-1.5">العنوان (عربي أو إنجليزي في خانة واحدة)</label>
+                  <input id="f-title" type="text" required value="${escapeHtml(editingItem ? editingItem.title : "")}" placeholder="مثال: Porsche Cayenne Coupe 2024 – Nardo Grey" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:border-[#C8A236]" />
                 </div>
 
 
-                <!-- Preview Grid -->
-                <div id="admin-images-grid" class="grid grid-cols-3 sm:grid-cols-5 gap-2.5">
-                  ${renderAdminImagesGridHtml()}
+                <!-- Price & Currency -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  <div class="col-span-1 sm:col-span-2">
+                    <label class="block text-xs font-bold text-gray-600 mb-1.5">السعر (أرقام فقط)</label>
+                    <input id="f-price" type="number" required min="0" step="any" value="${editingItem ? editingItem.price : ""}" placeholder="8000000" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-bold focus:outline-none focus:border-[#C8A236]" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-1.5">العملة</label>
+                    <select id="f-currency" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-bold focus:outline-none focus:border-[#C8A236]">
+                      <option value="EGP" ${!editingItem || editingItem.currency === "EGP" ? "selected" : ""}>EGP (جنيه)</option>
+                      <option value="USD" ${editingItem && editingItem.currency === "USD" ? "selected" : ""}>USD (دولار)</option>
+                    </select>
+                  </div>
                 </div>
+
+
+                <!-- SINGLE DESCRIPTION FIELD -->
+                <div>
+                  <label class="block text-xs font-bold text-gray-600 mb-1.5">الوصف (عربي أو إنجليزي — استخدم • للنقاط و **للعناوين العريضة**)</label>
+                  <textarea id="f-description" rows="6" required placeholder="اكتب مواصفات المنتج هنا..." class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm leading-relaxed focus:outline-none focus:border-[#C8A236]">${escapeHtml(editingItem ? editingItem.description : "")}</textarea>
+                </div>
+
+
+                <!-- MULTI IMAGE UPLOADER (UP TO 15 IMAGES) -->
+                <div class="bg-gray-50 rounded-2xl p-4 border border-dashed border-[#C8A236]/60">
+                  <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <div>
+                      <span class="text-sm font-extrabold text-[#0B132B]">صور المنتج (مسموح حتى 15 صورة)</span>
+                      <span id="admin-img-count" class="mr-2 text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-[#9A7418]">${state.adminFormImages.length} / 15</span>
+                    </div>
+                    <label class="cursor-pointer px-4 py-2 rounded-xl gold-gradient text-[#0B132B] text-xs font-extrabold shadow-sm">
+                      + اختر صور من جهازك
+                      <input type="file" accept="image/*" multiple onchange="handleAdminImageFiles(event)" class="hidden" />
+                    </label>
+                  </div>
+
+
+                  <!-- Optional Image URL Input -->
+                  <div class="flex gap-2 mb-3">
+                    <input id="f-img-url" type="url" placeholder="أو الصق رابط صورة مباشر (https://...)" class="flex-1 bg-white border border-gray-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-[#C8A236]" />
+                    <button type="button" onclick="addAdminImageUrl()" class="px-3 py-2 rounded-xl bg-[#0B132B] text-white text-xs font-bold">إضافة رابط</button>
+                  </div>
+
+
+                  <!-- Preview Grid -->
+                  <div id="admin-images-grid" class="grid grid-cols-3 sm:grid-cols-5 gap-2.5">
+                    ${renderAdminImagesGridHtml()}
+                  </div>
+                </div>
+
+
+                <button id="admin-submit-btn" type="submit" class="w-full gold-gradient text-[#0B132B] font-extrabold py-3.5 rounded-2xl shadow-md text-base transition">
+                  ${editingItem ? "حفظ التعديلات" : "نشر المنتج في الموقع"}
+                </button>
+              </form>
+            </div>
+
+
+            <!-- EXISTING PRODUCTS LIST -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border border-gray-100 card-shadow">
+              <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                <h2 class="text-lg font-extrabold text-[#0B132B]">المنتجات الحالية (${state.products.length})</h2>
+                <input
+                  type="text"
+                  value="${escapeHtml(state.adminSearch)}"
+                  oninput="window.updateAdminSearch(this.value)"
+                  placeholder="بحث في المنتجات..."
+                  class="bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-xs w-56 focus:outline-none focus:border-[#C8A236]"
+                />
               </div>
 
 
-              <button id="admin-submit-btn" type="submit" class="w-full gold-gradient text-[#0B132B] font-extrabold py-3.5 rounded-2xl shadow-md text-base transition">
-                ${editingItem ? "حفظ التعديلات" : "نشر المنتج في الموقع"}
-              </button>
-            </form>
-          </div>
-
-
-          <!-- EXISTING PRODUCTS LIST -->
-          <div class="bg-white rounded-3xl p-5 sm:p-6 border border-gray-100 card-shadow">
-            <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-              <h2 class="text-lg font-extrabold text-[#0B132B]">المنتجات الحالية (${state.products.length})</h2>
-              <input
-                type="text"
-                value="${escapeHtml(state.adminSearch)}"
-                oninput="window.updateAdminSearch(this.value)"
-                placeholder="بحث في المنتجات..."
-                class="bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-xs w-56 focus:outline-none focus:border-[#C8A236]"
-              />
-            </div>
-
-
-            <div class="divide-y divide-gray-100">
-              ${filteredAdminProducts.map(p => `
-                <div class="py-3.5 flex items-center justify-between gap-3">
-                  <div class="flex items-center gap-3 min-w-0">
-                    <img src="${(p.images && p.images[0]) || makeLuxuryPlaceholder(p.category, p.title)}" class="w-14 h-14 rounded-xl object-cover bg-[#0B132B] shrink-0" />
-                    <div class="min-w-0">
-                      <div class="font-bold text-sm text-[#0B132B] truncate">${escapeHtml(p.title)}</div>
-                      <div class="text-xs text-gray-500 mt-0.5">${formatPrice(p.price, p.currency)} • ${p.category}</div>
+              <div class="divide-y divide-gray-100">
+                ${filteredAdminProducts.map(p => {
+                  const catName = getCategoryConfig(p.category).name;
+                  return `
+                    <div class="py-3.5 flex items-center justify-between gap-3">
+                      <div class="flex items-center gap-3 min-w-0">
+                        <img src="${(p.images && p.images[0]) || makeLuxuryPlaceholder(catName, p.title)}" class="w-14 h-14 rounded-xl object-cover bg-[#0B132B] shrink-0" />
+                        <div class="min-w-0">
+                          <div class="font-bold text-sm text-[#0B132B] truncate">${escapeHtml(p.title)}</div>
+                          <div class="text-xs text-gray-500 mt-0.5">${formatPrice(p.price, p.currency)} • ${escapeHtml(catName)}</div>
+                        </div>
+                      </div>
+                      <div class="flex items-center gap-2 shrink-0">
+                        <button onclick="startEditProduct('${p.id}')" class="px-3 py-1.5 rounded-lg bg-amber-50 text-[#9A7418] text-xs font-bold hover:bg-amber-100">تعديل</button>
+                        <button onclick="confirmDeleteProduct('${p.id}')" class="px-3 py-1.5 rounded-lg bg-red-50 text-red-600 text-xs font-bold hover:bg-red-100">حذف</button>
+                      </div>
                     </div>
-                  </div>
-                  <div class="flex items-center gap-2 shrink-0">
-                    <button onclick="startEditProduct('${p.id}')" class="px-3 py-1.5 rounded-lg bg-amber-50 text-[#9A7418] text-xs font-bold hover:bg-amber-100">تعديل</button>
-                    <button onclick="confirmDeleteProduct('${p.id}')" class="px-3 py-1.5 rounded-lg bg-red-50 text-red-600 text-xs font-bold hover:bg-red-100">حذف</button>
-                  </div>
-                </div>
-              `).join("")}
+                  `;
+                }).join("")}
+              </div>
             </div>
-          </div>
+          `}
         </section>
       `;
     }
@@ -1810,6 +2464,7 @@
     window.startEditProduct = async function (id) {
       const p = state.products.find(x => x.id === id);
       if (!p) return;
+      state.adminTab = "products";
       state.editingProductId = id;
       showToast("جاري تحميل صور المنتج...");
       state.adminFormImages = [...(await fetchProductFullImages(p))];
@@ -1893,20 +2548,20 @@
       if (!p) return;
 
 
+      const cat = getCategoryConfig(p.category);
       state.modalProduct = p;
-      state.modalImages = p.images && p.images.length ? [...p.images] : [makeLuxuryPlaceholder(p.category, p.title)];
+      state.modalImages = p.images && p.images.length ? [...p.images] : [makeLuxuryPlaceholder(cat.name, p.title)];
       state.modalImageIndex = 0;
 
 
-      const cat = CATEGORIES.find(c => c.id === p.category);
-      document.getElementById("modal-category-badge").textContent = cat ? cat.name : p.category;
+      document.getElementById("modal-category-badge").textContent = cat.name;
       document.getElementById("modal-sub-badge").textContent = p.subcategory || "";
       document.getElementById("modal-title").textContent = p.title;
       document.getElementById("modal-price").textContent = formatPrice(p.price, p.currency);
       document.getElementById("modal-description").innerHTML = formatDescriptionHtml(p.description);
 
 
-      const waMsg = encodeURIComponent(`مرحباً Magnet Group، أستفسر عن:\n${p.title}\nالسعر: ${formatPrice(p.price, p.currency)}`);
+      const waMsg = encodeURIComponent(`مرحباً ${getSiteName()}، أستفسر عن:\n${p.title}\nالسعر: ${formatPrice(p.price, p.currency)}`);
       document.getElementById("modal-wa-btn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`;
 
 
@@ -2147,6 +2802,9 @@
     // 8. دالة الرسم الرئيسية
     // =========================================================================
     function render() {
+      syncBrandChrome();
+
+
       const root = document.getElementById("app-root");
       const backBtn = document.getElementById("nav-back-btn");
       backBtn.classList.toggle("hidden", state.view === "home");
